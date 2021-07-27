@@ -28,7 +28,7 @@ class NewsListPresenter: NewsListPresenterProtocol {
     
     func showListOfItems() {
         interactor.getListOfItems { newsItems in
-            view?.showListOfItems(items: newsItems)
+            self.view?.showListOfItems(items: newsItems)
         }
     }
     

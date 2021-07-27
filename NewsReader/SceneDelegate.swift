@@ -1,9 +1,3 @@
-//
-//  SceneDelegate.swift
-//  NewsReader
-//
-//  Created by 19399090 on 27.07.2021.
-//
 
 import UIKit
 
@@ -11,15 +5,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let vc = ViewController()
+        let vc = NewsListAssembly().assembleNewsListModule()
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
-        
     }
 
 }

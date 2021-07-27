@@ -10,7 +10,7 @@ protocol DetaildItemViewProtocol: AnyObject {
     func showSafariLink(validUrl: URL)
 }
 
-class DetailedItemVC: UIViewController {
+final class DetailedItemVC: UIViewController {
     
     var presenter: DetailedItemPresenterProtocol!
 
@@ -87,7 +87,7 @@ class DetailedItemVC: UIViewController {
         view.addSubview(openResourceButton)
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             imageView.heightAnchor.constraint(equalToConstant: imageHeight),
@@ -116,6 +116,7 @@ class DetailedItemVC: UIViewController {
 
 }
 
+//MARK: - DetaildItemViewProtocol
 extension DetailedItemVC: DetaildItemViewProtocol {
     func setTitle(string: String) {
         itemFullTitle.text = string

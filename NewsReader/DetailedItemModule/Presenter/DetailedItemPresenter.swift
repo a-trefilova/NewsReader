@@ -6,11 +6,12 @@ protocol DetailedItemPresenterProtocol: AnyObject {
     func openResource()
 }
 
-class DetailedItemPresenter: DetailedItemPresenterProtocol {
+final class DetailedItemPresenter: DetailedItemPresenterProtocol {
     
     weak var view: DetaildItemViewProtocol?
     var newsItem: NewsItem!
     var interactor: DetailedItemInteractorProtocol!
+    
     init(view: DetaildItemViewProtocol) {
         self.view = view
     }

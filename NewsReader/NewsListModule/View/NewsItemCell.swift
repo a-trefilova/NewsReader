@@ -1,13 +1,7 @@
-//
-//  NewsItemCell.swift
-//  NewsReader
-//
-//  Created by 19399090 on 27.07.2021.
-//
 
 import UIKit
 
-class NewsItemCell: UITableViewCell {
+final class NewsItemCell: UITableViewCell {
     
     static let reuseId = "NewsItemCell"
     
@@ -43,7 +37,7 @@ class NewsItemCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-       // layoutElements()
+        layoutElements()
     }
     
     required init?(coder: NSCoder) {
@@ -58,7 +52,6 @@ class NewsItemCell: UITableViewCell {
         itemTitle.text = newsItem.title
         itemDate.text = formateDateToString(date: newsItem.pubDate)
         itemImage.downloadImage(from: newsItem.imageUrl)
-        layoutElements()
     }
     
     private func layoutElements() {

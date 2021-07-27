@@ -1,19 +1,17 @@
 
 import UIKit
 
-class NewsListAssembly {
+final class NewsListAssembly {
     
-    func assembleNewsListModule() -> UIViewController {
+    func assembleNewsListModule(with router: NewsReaderRouter) -> UIViewController {
         let view = NewsListVC()
         let presenter = NewsListPresenter(view: view)
         let interactor = NewsListInteractor(presenter: presenter)
-        let router = NewsReaderRouter(viewController: view)
         
         view.presenter = presenter
         presenter.interactor = interactor
         presenter.router = router
         
-        let navigationController = UINavigationController(rootViewController: view)
-        return navigationController
+        return view
     }
 }

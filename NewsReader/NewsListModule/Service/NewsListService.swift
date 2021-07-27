@@ -8,11 +8,11 @@
 import Foundation
 
 protocol NewsListServiceProtocol {
-    func fetchItems(completion: ([NewsItem]) -> Void)
+    func fetchItems(completion: @escaping ([NewsItem]) -> Void)
 }
 
 class NewsListService: NewsListServiceProtocol {
-    func fetchItems(completion: ([NewsItem]) -> Void) {
+    func fetchItems(completion: @escaping ([NewsItem]) -> Void) {
         completion([])
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NewsListInteractorProtocol {
-    func getListOfItems(completion: ([NewsItem]) -> Void)
+    func getListOfItems(completion: @escaping ([NewsItem]) -> Void)
 }
 
 class NewsListInteractor: NewsListInteractorProtocol {
@@ -19,7 +19,7 @@ class NewsListInteractor: NewsListInteractorProtocol {
         self.presenter = presenter
     }
     
-    func getListOfItems(completion: ([NewsItem]) -> Void) {
+    func getListOfItems(completion: @escaping ([NewsItem]) -> Void) {
         service.fetchItems { items in
             completion(items)
         }

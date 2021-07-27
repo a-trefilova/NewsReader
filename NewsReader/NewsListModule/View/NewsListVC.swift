@@ -69,6 +69,6 @@ extension NewsListVC: UITableViewDataSource {
 
 extension NewsListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        80
+        100
     }
 }

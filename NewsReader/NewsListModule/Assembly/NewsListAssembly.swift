@@ -13,6 +13,7 @@ class NewsListAssembly {
         presenter.interactor = interactor
         presenter.router = router
         
-        return view
+        let navigationController = UINavigationController(rootViewController: view)
+        return navigationController
     }
 }

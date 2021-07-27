@@ -21,6 +21,7 @@
 		248A1A0D26B026F3002B8100 /* XMLParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A0C26B026F3002B8100 /* XMLParserService.swift */; };
 		248A1A1126B02B48002B8100 /* NewsItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A1026B02B48002B8100 /* NewsItemCell.swift */; };
 		248A1A1526B03FA6002B8100 /* NewsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A1426B03FA6002B8100 /* NewsImageView.swift */; };
+		248A1A1A26B04EAF002B8100 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A1926B04EAF002B8100 /* CacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		248A1A0C26B026F3002B8100 /* XMLParserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParserService.swift; sourceTree = "<group>"; };
 		248A1A1026B02B48002B8100 /* NewsItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemCell.swift; sourceTree = "<group>"; };
 		248A1A1426B03FA6002B8100 /* NewsImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsImageView.swift; sourceTree = "<group>"; };
+		248A1A1926B04EAF002B8100 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				243F0AF626AFF0A100EB5B48 /* NewsListService.swift */,
 				248A1A0C26B026F3002B8100 /* XMLParserService.swift */,
+				248A1A1926B04EAF002B8100 /* CacheManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				243F0AD426AFEB7000EB5B48 /* NewsListVC.swift in Sources */,
 				243F0AD026AFEB7000EB5B48 /* AppDelegate.swift in Sources */,
 				248A1A1526B03FA6002B8100 /* NewsImageView.swift in Sources */,
+				248A1A1A26B04EAF002B8100 /* CacheManager.swift in Sources */,
 				243F0B0026AFF14900EB5B48 /* NewsReaderRouter.swift in Sources */,
 				248A1A1126B02B48002B8100 /* NewsItemCell.swift in Sources */,
 				243F0AD226AFEB7000EB5B48 /* SceneDelegate.swift in Sources */,

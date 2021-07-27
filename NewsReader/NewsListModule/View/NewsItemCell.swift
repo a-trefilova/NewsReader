@@ -12,7 +12,7 @@ class NewsItemCell: UITableViewCell {
     static let reuseId = "NewsItemCell"
     
     private let imageSize: CGFloat = 50
-    private let padding: CGFloat = 15
+    private let padding: CGFloat = 10
     private var container: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -21,35 +21,44 @@ class NewsItemCell: UITableViewCell {
     }()
     private var itemTitle: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .secondaryLabel
-        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textColor = .label
+        label.numberOfLines = 3
+        label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private var itemDate: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .secondaryLabel
         label.numberOfLines = 1
         label.textAlignment = .right
+        label.translatesAutoresizingMaskIntoConstraints = false
+
         return label
     }()
     private var itemImage = NewsImageView(frame: .zero)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        layoutElements()
+       // layoutElements()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        itemImage.image = nil
+    }
+    
     func configure(with newsItem: NewsItem) {
         itemTitle.text = newsItem.title
         itemDate.text = formateDateToString(date: newsItem.pubDate)
         itemImage.downloadImage(from: newsItem.imageUrl)
+        layoutElements()
     }
     
     private func layoutElements() {
@@ -72,7 +81,7 @@ class NewsItemCell: UITableViewCell {
             itemTitle.leadingAnchor.constraint(equalTo: itemImage.trailingAnchor, constant: padding),
             itemTitle.topAnchor.constraint(equalTo: container.topAnchor, constant: padding),
             itemTitle.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding),
-            itemTitle.trailingAnchor.constraint(equalTo: itemDate.leadingAnchor),
+            itemTitle.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding),
 
             itemDate.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding),
             itemDate.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding),

@@ -1,16 +1,13 @@
-//
-//  XMLParserService.swift
-//  NewsReader
-//
-//  Created by 19399090 on 27.07.2021.
-//
 
 import Foundation
+
+protocol XMLParserServiceDelegate: AnyObject {
+    func getItems(_ items: [NewsItem])
+}
 
 class XMLParserService: NSObject, XMLParserDelegate {
     
     var completionHandler: (([NewsItem]) -> Void)?
-    
     private lazy var parser: XMLParser = {
         let parser = XMLParser(data: data)
         parser.delegate = self
@@ -24,7 +21,7 @@ class XMLParserService: NSObject, XMLParserDelegate {
                                            pubDate: Date(),
                                            imageUrl: "",
                                            author: "")
-    
+    private var shouldReturnResult = false
     
     private let data: Data
     init(data: Data) {
@@ -33,7 +30,11 @@ class XMLParserService: NSObject, XMLParserDelegate {
         parser.parse()
     }
     
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+    func parser(_ parser: XMLParser,
+                didStartElement elementName: String,
+                namespaceURI: String?,
+                qualifiedName qName: String?,
+                attributes attributeDict: [String : String] = [:]) {
         currentXMLTag = elementName
         if elementName == "enclosure",
            let url = attributeDict["url"],
@@ -42,10 +43,10 @@ class XMLParserService: NSObject, XMLParserDelegate {
         }
     }
     
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
+    func parser(_ parser: XMLParser,
+                foundCharacters string: String) {
         let formatter = DateFormatter()
         formatter.dateFormat = "E, d MMM yyyy HH:mm:ss Z"
-        print(currentXMLTag)
         switch currentXMLTag {
         case "title" : currentNewsItem.title += string
         case "description": currentNewsItem.description += string
@@ -57,7 +58,10 @@ class XMLParserService: NSObject, XMLParserDelegate {
         }
     }
     
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser,
+                didEndElement elementName: String,
+                namespaceURI: String?,
+                qualifiedName qName: String?) {
         if elementName == "item" {
             arrayOfNewsItems.append(currentNewsItem)
             resetCurrentItem()
@@ -65,16 +69,24 @@ class XMLParserService: NSObject, XMLParserDelegate {
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-        print(arrayOfNewsItems)
-       completionHandler?(arrayOfNewsItems)
+        shouldReturnResult = true
+    }
+    
+    func getResult(completion: @escaping ([NewsItem]) -> Void) {
+        if shouldReturnResult {
+            completion(arrayOfNewsItems)
+        } else {
+            getResult(completion: { _ in })
+        }
     }
     
     private func resetCurrentItem() {
         currentNewsItem = NewsItem(title: "",
-                                  description: "",
-                                  link: "",
-                                  pubDate: Date(),
-                                  imageUrl: "",
-                                  author: "")
+                                   description: "",
+                                   link: "",
+                                   pubDate: Date(),
+                                   imageUrl: "",
+                                   author: "")
     }
 }
+

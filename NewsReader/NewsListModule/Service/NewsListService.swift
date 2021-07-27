@@ -13,6 +13,7 @@ protocol NewsListServiceProtocol {
 
 class NewsListService: NewsListServiceProtocol {
     
+    private var parser: XMLParserService!
     private let entryPoint = "http://static.feed.rbc.ru/rbc/logical/footer/news.rss"
     
     func fetchItems(completion: @escaping ([NewsItem]) -> Void) {
@@ -20,8 +21,8 @@ class NewsListService: NewsListServiceProtocol {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil else { return }
             if let data = data {
-                let parser = XMLParserService(data: data)
-                parser.completionHandler = { items in
+                self.parser = XMLParserService(data: data)
+                self.parser.getResult { items in
                     completion(items)
                 }
             }
@@ -30,3 +31,5 @@ class NewsListService: NewsListServiceProtocol {
     }
     
 }
+
+

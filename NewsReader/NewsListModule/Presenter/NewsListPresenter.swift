@@ -27,8 +27,11 @@ class NewsListPresenter: NewsListPresenterProtocol {
     }
     
     func showListOfItems() {
-        interactor.getListOfItems { newsItems in
-            self.view?.showListOfItems(items: newsItems)
+        interactor.getListOfItems { [weak self] newsItems in
+            guard let self = self else { fatalError()}
+            DispatchQueue.main.async {
+                self.view?.showListOfItems(items: newsItems)
+            }
         }
     }
     

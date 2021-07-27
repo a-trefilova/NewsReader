@@ -62,6 +62,7 @@ class XMLParserService: NSObject, XMLParserDelegate {
                 didEndElement elementName: String,
                 namespaceURI: String?,
                 qualifiedName qName: String?) {
+        currentNewsItem.link = prepareLink(link: currentNewsItem.link)
         if elementName == "item" {
             arrayOfNewsItems.append(currentNewsItem)
             resetCurrentItem()
@@ -78,6 +79,12 @@ class XMLParserService: NSObject, XMLParserDelegate {
         } else {
             getResult(completion: { _ in })
         }
+    }
+    
+    private func prepareLink(link: String) -> String {
+        var formattedLink = link.replacingOccurrences(of: "\n", with: "")
+        formattedLink = formattedLink.replacingOccurrences(of: " ", with: "")
+        return formattedLink
     }
     
     private func resetCurrentItem() {

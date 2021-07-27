@@ -8,12 +8,12 @@
 import Foundation
 
 protocol NewsListPresenterProtocol: AnyObject {
-    func configureView()
     func showListOfItems()
+    func showDetailItem(item: NewsItem)
 }
 
 class NewsListPresenter: NewsListPresenterProtocol {
-    
+
     weak var view: NewsListViewProtocol?
     var interactor: NewsListInteractorProtocol!
     var router: NewsReaderRouter!  // FIXME: заменить на протокол
@@ -21,11 +21,7 @@ class NewsListPresenter: NewsListPresenterProtocol {
     init(view: NewsListViewProtocol) {
         self.view = view
     }
-    
-    func configureView() {
-        view?.prepareView()
-    }
-    
+   
     func showListOfItems() {
         interactor.getListOfItems { [weak self] newsItems in
             guard let self = self else { fatalError()}
@@ -33,6 +29,10 @@ class NewsListPresenter: NewsListPresenterProtocol {
                 self.view?.showListOfItems(items: newsItems)
             }
         }
+    }
+    
+    func showDetailItem(item: NewsItem) {
+        router.showDetailedViewController(newsItem: item)
     }
     
 }

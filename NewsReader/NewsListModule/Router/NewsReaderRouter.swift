@@ -9,11 +9,20 @@ import UIKit
 
 class NewsReaderRouter {
     
+    let navigationController: UINavigationController
     weak var viewController: NewsListVC!
     
     init(viewController: NewsListVC) {
         self.viewController = viewController
+        if let navController = viewController.navigationController {
+            navigationController = navController
+        } else {
+            navigationController = UINavigationController(rootViewController: viewController)
+        }
     }
     
-    
+    func showDetailedViewController(newsItem: NewsItem) {
+        let detailedViewController = DetailedItemAssembly().assembleDetailedItemModule(newsItem: newsItem)
+        viewController.present(detailedViewController, animated: true, completion: nil)
+    }
 }

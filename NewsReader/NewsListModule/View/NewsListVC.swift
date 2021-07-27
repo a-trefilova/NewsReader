@@ -2,7 +2,6 @@
 import UIKit
 
 protocol NewsListViewProtocol: AnyObject {
-    func prepareView()
     func showListOfItems(items: [NewsItem])
 }
 
@@ -14,7 +13,6 @@ class NewsListVC: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.configureView()
         presenter.showListOfItems()
         setupTableView()
         layoutTableView()
@@ -40,11 +38,7 @@ class NewsListVC: UIViewController {
 }
 
 extension NewsListVC: NewsListViewProtocol {
-    
-    func prepareView() {
-
-    }
-    
+  
     func showListOfItems(items: [NewsItem]) {
         newsItemsList = items
         tableView.reloadData()
@@ -68,7 +62,18 @@ extension NewsListVC: UITableViewDataSource {
 }
 
 extension NewsListVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        0
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let currentItem = newsItemsList[indexPath.row]
+        presenter.showDetailItem(item: currentItem)
     }
 }

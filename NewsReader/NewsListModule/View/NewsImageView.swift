@@ -1,9 +1,9 @@
 
 import UIKit
 
-class NewsImageView: UIImageView {
+final class NewsImageView: UIImageView {
     
-    private let cache = CacheManager.shared.cache
+    private let cache = CacheService.shared.cache
     private let placeholderImage = UIImage(named: "")
     
     override init(frame: CGRect) {

@@ -1,9 +1,3 @@
-//
-//  NewsListPresenter.swift
-//  NewsReader
-//
-//  Created by 19399090 on 27.07.2021.
-//
 
 import Foundation
 
@@ -12,7 +6,7 @@ protocol NewsListPresenterProtocol: AnyObject {
     func showDetailItem(item: NewsItem)
 }
 
-class NewsListPresenter: NewsListPresenterProtocol {
+final class NewsListPresenter: NewsListPresenterProtocol {
 
     weak var view: NewsListViewProtocol?
     var interactor: NewsListInteractorProtocol!

@@ -1,9 +1,4 @@
-//
-//  NewsListService.swift
-//  NewsReader
-//
-//  Created by 19399090 on 27.07.2021.
-//
+
 
 import Foundation
 
@@ -11,7 +6,7 @@ protocol NewsListServiceProtocol {
     func fetchItems(completion: @escaping ([NewsItem]) -> Void)
 }
 
-class NewsListService: NewsListServiceProtocol {
+final class NewsListService: NewsListServiceProtocol {
     
     private var parser: XMLParserService!
     private let entryPoint = "http://static.feed.rbc.ru/rbc/logical/footer/news.rss"

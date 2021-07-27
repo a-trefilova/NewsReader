@@ -1,13 +1,8 @@
 
 import Foundation
 
-protocol XMLParserServiceDelegate: AnyObject {
-    func getItems(_ items: [NewsItem])
-}
+final class XMLParserService: NSObject, XMLParserDelegate {
 
-class XMLParserService: NSObject, XMLParserDelegate {
-    
-    var completionHandler: (([NewsItem]) -> Void)?
     private lazy var parser: XMLParser = {
         let parser = XMLParser(data: data)
         parser.delegate = self

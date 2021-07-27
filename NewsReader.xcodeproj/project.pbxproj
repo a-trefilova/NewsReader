@@ -82,6 +82,7 @@
 		243F0ACE26AFEB7000EB5B48 /* NewsReader */ = {
 			isa = PBXGroup;
 			children = (
+				243F0AED26AFEFDB00EB5B48 /* Router */,
 				248A1A1E26B05595002B8100 /* DetailedItemModule */,
 				243F0AE726AFEF9C00EB5B48 /* NewsListModule */,
 				243F0ACF26AFEB7000EB5B48 /* AppDelegate.swift */,
@@ -97,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				243F0AEE26AFEFEA00EB5B48 /* Assembly */,
-				243F0AED26AFEFDB00EB5B48 /* Router */,
 				243F0AEC26AFEFD400EB5B48 /* View */,
 				243F0AEB26AFEFCE00EB5B48 /* Presenter */,
 				243F0AEA26AFEFC700EB5B48 /* Interactor */,

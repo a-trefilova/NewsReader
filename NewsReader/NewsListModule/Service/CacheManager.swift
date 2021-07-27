@@ -1,8 +1,8 @@
 
 import UIKit
 
-class CacheManager {
+final class CacheService {
     private init() {}
-    static let shared = CacheManager()
+    static let shared = CacheService()
     let cache = NSCache<NSString, UIImage>()
 }

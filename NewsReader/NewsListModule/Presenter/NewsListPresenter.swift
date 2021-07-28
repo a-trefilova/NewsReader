@@ -3,30 +3,33 @@ import Foundation
 
 protocol NewsListPresenterProtocol: AnyObject {
     func showListOfItems()
-    func showDetailItem(item: NewsItem)
+    func showDetailItem(_ item: NewsItem)
 }
 
 final class NewsListPresenter: NewsListPresenterProtocol {
 
+    var interactor: NewsListInteractorProtocol?
+    var router: NewsReaderRouter?
     weak var view: NewsListViewProtocol?
-    var interactor: NewsListInteractorProtocol!
-    var router: NewsReaderRouter!  // FIXME: заменить на протокол
-    
+
     init(view: NewsListViewProtocol) {
         self.view = view
     }
    
     func showListOfItems() {
-        interactor.getListOfItems { [weak self] newsItems in
-            guard let self = self else { fatalError()}
-            DispatchQueue.main.async {
-                self.view?.showListOfItems(items: newsItems)
+        interactor?.getListOfItems { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let items):
+                DispatchQueue.main.async { self.view?.showListOfItems(items: items) }
+            case .failure(let error):
+                DispatchQueue.main.async { self.view?.showErrorMessage(error.localizedDescription) }
             }
         }
     }
     
-    func showDetailItem(item: NewsItem) {
-        router.showDetailedViewController(newsItem: item)
+    func showDetailItem(_ item: NewsItem) {
+        router?.showDetailedViewController(for: item)
     }
     
 }

@@ -2,7 +2,7 @@
 import UIKit
 
 protocol DetailedItemInteractorProtocol: AnyObject {
-    func validateUrl(urlString: String, completion: @escaping (URL) -> Void)
+    func validateUrl(urlString: String, completion: @escaping (Result<URL, ErrorType>) -> Void)
 }
 
 final class DetailedItemInteractor: DetailedItemInteractorProtocol {
@@ -13,10 +13,11 @@ final class DetailedItemInteractor: DetailedItemInteractorProtocol {
         self.presenter = presenter
     }
     
-    func validateUrl(urlString: String, completion: @escaping (URL) -> Void) {
+    func validateUrl(urlString: String, completion: @escaping (Result<URL, ErrorType>) -> Void) {
         if let url = URL(string: urlString) {
-            completion(url)
+            completion(.success(url))
+        } else {
+            completion(.failure(.invalidEntryPoint))
         }
     }
-    
 }

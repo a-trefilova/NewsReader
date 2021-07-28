@@ -8,11 +8,12 @@ protocol DetaildItemViewProtocol: AnyObject {
     func setDate(string: String)
     func setAuthorName(string: String)
     func showSafariLink(validUrl: URL)
+    func showErrorMessage(_ message: String)
 }
 
 final class DetailedItemVC: UIViewController {
     
-    var presenter: DetailedItemPresenterProtocol!
+    var presenter: DetailedItemPresenterProtocol?
 
     private let padding: CGFloat = 20
     private let imageHeight: CGFloat = 120
@@ -68,13 +69,12 @@ final class DetailedItemVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layoutSubviews()
-        presenter.showDetailedInfo()
+        presenter?.showDetailedInfo()
     }
     
-
     @objc
     func openResourceButtonTapped() {
-        presenter.openResource()
+        presenter?.openResource()
     }
     
     private func layoutSubviews() {
@@ -141,6 +141,12 @@ extension DetailedItemVC: DetaildItemViewProtocol {
     func showSafariLink(validUrl: URL) {
         UIApplication.shared.open(validUrl, options: [:], completionHandler: { _ in })
     }
-    
+
+    func showErrorMessage(_ message: String) {
+        let alert = UIAlertController(title: "Oops!", message: "Something went wrong! \(message)", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Confirm", style: .cancel)
+        alert.addAction(confirmAction)
+        self.present(alert, animated: true)
+    }
 }
 

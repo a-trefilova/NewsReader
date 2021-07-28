@@ -30,7 +30,6 @@ final class NewsItemCell: UITableViewCell {
         label.numberOfLines = 1
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
-
         return label
     }()
     private var itemImage = NewsImageView(frame: .zero)
@@ -87,6 +86,5 @@ final class NewsItemCell: UITableViewCell {
         formatter.dateFormat = "MMM dd,yyyy"
         return formatter.string(from: date)
     }
-   
 }
 

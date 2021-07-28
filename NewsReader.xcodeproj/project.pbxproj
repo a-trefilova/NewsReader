@@ -26,6 +26,7 @@
 		248A1A2826B05606002B8100 /* DetailedItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A2726B05606002B8100 /* DetailedItemVC.swift */; };
 		248A1A2B26B0561E002B8100 /* DetailedItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A2A26B0561E002B8100 /* DetailedItemPresenter.swift */; };
 		248A1A2E26B0562B002B8100 /* DetailedItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A2D26B0562B002B8100 /* DetailedItemInteractor.swift */; };
+		248FE54326B152CC006CF8B9 /* ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FE54226B152CC006CF8B9 /* ErrorType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		248A1A2726B05606002B8100 /* DetailedItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedItemVC.swift; sourceTree = "<group>"; };
 		248A1A2A26B0561E002B8100 /* DetailedItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedItemPresenter.swift; sourceTree = "<group>"; };
 		248A1A2D26B0562B002B8100 /* DetailedItemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedItemInteractor.swift; sourceTree = "<group>"; };
+		248FE54226B152CC006CF8B9 /* ErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				243F0AF926AFF0D000EB5B48 /* NewsEntity.swift */,
+				248FE54226B152CC006CF8B9 /* ErrorType.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				248A1A2426B055F0002B8100 /* DetailedItemAssembly.swift in Sources */,
 				248A1A2E26B0562B002B8100 /* DetailedItemInteractor.swift in Sources */,
 				248A1A1A26B04EAF002B8100 /* CacheManager.swift in Sources */,
+				248FE54326B152CC006CF8B9 /* ErrorType.swift in Sources */,
 				248A1A2B26B0561E002B8100 /* DetailedItemPresenter.swift in Sources */,
 				243F0B0026AFF14900EB5B48 /* NewsReaderRouter.swift in Sources */,
 				248A1A1126B02B48002B8100 /* NewsItemCell.swift in Sources */,

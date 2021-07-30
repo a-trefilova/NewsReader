@@ -3,7 +3,7 @@ import Foundation
 
 protocol NewsListPresenterProtocol: AnyObject {
     func didLoadView()
-    func didSelectItem(_ item: NewsItem)
+    func didSelectViewModel(_ viewModelId: String)
 }
 
 final class NewsListPresenter: NewsListPresenterProtocol {
@@ -22,15 +22,15 @@ final class NewsListPresenter: NewsListPresenterProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let items):
-                DispatchQueue.main.async { self.view?.showListOfItems(items: items) }
+                DispatchQueue.main.async { self.view?.showListOfViewModels(viewModels: items)}
             case .failure(let error):
                 DispatchQueue.main.async { self.router.showErrorMessage(error.localizedDescription) }
             }
         }
     }
-    
-    func didSelectItem(_ item: NewsItem) {
-        router.showDetailedViewController(for: item)
+
+    func didSelectViewModel(_ viewModelId: String) {
+        router.showDetailedViewController(for: viewModelId)
     }
-    
+
 }

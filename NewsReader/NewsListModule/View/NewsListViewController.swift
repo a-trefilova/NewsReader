@@ -2,15 +2,15 @@
 import UIKit
 
 protocol NewsListViewProtocol: AnyObject {
-    func showListOfItems(items: [NewsItem])
+    func showListOfViewModels(viewModels: [NewsItemCellViewModel])
 }
 
-final class NewsListVC: UIViewController {
+final class NewsListViewController: UIViewController {
 
     var presenter: NewsListPresenterProtocol?
 
     private let tableView = UITableView(frame: .zero, style: .grouped)
-    private var newsItemsList: [NewsItem] = []
+    private var viewModelList: [NewsItemCellViewModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,31 +39,41 @@ final class NewsListVC: UIViewController {
 }
 
 //MARK: - NewsListViewProtocol
-extension NewsListVC: NewsListViewProtocol {
-    func showListOfItems(items: [NewsItem]) {
-        newsItemsList = items
+extension NewsListViewController: NewsListViewProtocol {
+    func showListOfViewModels(viewModels: [NewsItemCellViewModel]) {
+        viewModelList = viewModels
         tableView.reloadData()
     }
-    
+
 }
 
 //MARK: - UITableViewDataSource
-extension NewsListVC: UITableViewDataSource {
+extension NewsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        newsItemsList.count
+        viewModelList.count
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let currentIndex = indexPath.row
+        guard currentIndex <= viewModelList.count - 1 else { return }
+        let currentViewModelId = viewModelList[currentIndex].id
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsItemCell.reuseId, for: indexPath) as? NewsItemCell else { return UITableViewCell() }
-        let currentItem = newsItemsList[indexPath.row]
-        cell.configure(with: currentItem)
+        let defaultCell = UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsItemCell.reuseId, for: indexPath) as? NewsItemCell else { return defaultCell }
+        let currentIndex = indexPath.row
+        guard currentIndex <= viewModelList.count - 1 else { return defaultCell }
+        let currentViewModel = viewModelList[currentIndex]
+        cell.render(currentViewModel)
         return cell
     }
     
 }
 
 //MARK: - UITableViewDelegate
-extension NewsListVC: UITableViewDelegate {
+extension NewsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         0
     }
@@ -74,7 +84,9 @@ extension NewsListVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let currentItem = newsItemsList[indexPath.row]
-        presenter?.didSelectItem(currentItem)
+        let currentIndex = indexPath.row
+        guard currentIndex <= viewModelList.count - 1 else { return }
+        let currentItem = viewModelList[indexPath.row]
+        presenter?.didSelectViewModel(currentItem.id)
     }
 }

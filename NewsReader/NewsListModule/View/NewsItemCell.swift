@@ -32,7 +32,13 @@ final class NewsItemCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private let itemImage = NewsImageView(frame: .zero)
+    private let itemImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,13 +50,14 @@ final class NewsItemCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         itemImage.image = nil
     }
     
-    func configure(with newsItem: NewsItem) {
-        itemTitle.text = newsItem.title
-        itemDate.text = formateDateToString(date: newsItem.pubDate)
-        itemImage.downloadImage(from: newsItem.imageUrl)
+    func render(_ viewModel: NewsItemCellViewModel) {
+        itemTitle.text = viewModel.title
+        itemDate.text = viewModel.date
+        itemImage.image = viewModel.image.uploadedImage
     }
     
     private func layoutElements() {
@@ -81,10 +88,5 @@ final class NewsItemCell: UITableViewCell {
         ])
     }
     
-    private func formateDateToString(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd,yyyy"
-        return formatter.string(from: date)
-    }
 }
 

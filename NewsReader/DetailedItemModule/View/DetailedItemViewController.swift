@@ -2,20 +2,22 @@
 import UIKit
 
 protocol DetaildItemViewProtocol: AnyObject {
-    func setTitle(string: String)
-    func setDescription(string: String)
-    func setImage(string: String?)
-    func setDate(string: String)
-    func setAuthorName(string: String)
+    func render(viewModel: DetailedItemViewModel)
 }
 
-final class DetailedItemVC: UIViewController {
+final class DetailedItemViewController: UIViewController {
     
     var presenter: DetailedItemPresenterProtocol?
 
     private let padding: CGFloat = 20
     private let imageHeight: CGFloat = 120
-    private let imageView = NewsImageView(frame: .zero)
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     private let itemFullTitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
@@ -115,25 +117,13 @@ final class DetailedItemVC: UIViewController {
 }
 
 //MARK: - DetaildItemViewProtocol
-extension DetailedItemVC: DetaildItemViewProtocol {
-    func setTitle(string: String) {
-        itemFullTitle.text = string
-    }
-    
-    func setDescription(string: String) {
-        itemDescription.text = string
-    }
-    
-    func setImage(string: String?) {
-        imageView.downloadImage(from: string)
-    }
-    
-    func setDate(string: String) {
-        itemDate.text = string
-    }
-    
-    func setAuthorName(string: String) {
-        authorName.text = string
+extension DetailedItemViewController: DetaildItemViewProtocol {
+    func render(viewModel: DetailedItemViewModel) {
+        itemFullTitle.text = viewModel.title
+        itemDescription.text = viewModel.description
+        imageView.image = viewModel.image.uploadedImage
+        itemDate.text = viewModel.date
+        authorName.text = viewModel.authorName
     }
 
 }

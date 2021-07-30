@@ -2,22 +2,24 @@
 import Foundation
 
 protocol DetailedItemPresenterProtocol: AnyObject {
-    func showDetailedInfo()
-    func openResource()
+    func didLoadView()
+    func didTapOnOpenResource()
 }
 
 final class DetailedItemPresenter: DetailedItemPresenterProtocol {
 
-    var newsItem: NewsItem?
     var interactor: DetailedItemInteractorProtocol?
-    weak var view: DetaildItemViewProtocol?
+    private let newsItem: NewsItem
+    private let router: DetailedItemRouterProtocol
+    private weak var view: DetaildItemViewProtocol?
 
-    init(view: DetaildItemViewProtocol) {
+    init(view: DetaildItemViewProtocol, router: DetailedItemRouterProtocol, newsItem: NewsItem) {
         self.view = view
+        self.router = router
+        self.newsItem = newsItem
     }
 
-    func showDetailedInfo() {
-        guard let newsItem = newsItem else { return }
+    func didLoadView() {
         view?.setTitle(string: newsItem.title)
         view?.setDate(string: formateDateToString(date: newsItem.pubDate))
         view?.setDescription(string: newsItem.description)
@@ -25,15 +27,15 @@ final class DetailedItemPresenter: DetailedItemPresenterProtocol {
         view?.setAuthorName(string: newsItem.author ?? "")
     }
     
-    func openResource() {
-        guard let urlString = newsItem?.link else { return }
+    func didTapOnOpenResource() {
+        let urlString = newsItem.link
         interactor?.validateUrl(urlString: urlString) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let validUrl):
-                DispatchQueue.main.async { self.view?.showSafariLink(validUrl: validUrl) }
+                DispatchQueue.main.async { self.router.showSafariLink(validUrl: validUrl) }
             case .failure(let error):
-                DispatchQueue.main.async { self.view?.showErrorMessage(error.localizedDescription) }
+                DispatchQueue.main.async { self.router.showErrorMessage(error.localizedDescription)}
             }
         }
     }

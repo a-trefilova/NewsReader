@@ -1,7 +1,7 @@
 
 import UIKit
 
-class NewsReaderRouter: NSObject {
+class MainRouter: NSObject {
     
     var navigationController: UINavigationController?
     var window: UIWindow?
@@ -17,7 +17,7 @@ class NewsReaderRouter: NSObject {
     }
     
     func showDetailedViewController(for newsItem: NewsItem) {
-        let detailedViewController = DetailedItemAssembly().assembleDetailedItemModule(newsItem: newsItem)
+        let detailedViewController = DetailedItemAssembly().assembleDetailedItemModule(newsItem: newsItem, mainRouter: self)
         navigationController?.pushViewController(detailedViewController, animated: true)
     }
 }

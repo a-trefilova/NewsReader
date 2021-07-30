@@ -3,14 +3,15 @@ import UIKit
 
 final class NewsListAssembly {
     
-    func assembleNewsListModule(with router: NewsReaderRouter) -> UIViewController {
+    func assembleNewsListModule(with mainRouter: MainRouter) -> UIViewController {
         let view = NewsListVC()
-        let presenter = NewsListPresenter(view: view)
-        let interactor = NewsListInteractor(presenter: presenter)
+        let service = NewsListService()
+        let moduleRouter = NewsListRouter(rootView: view, mainRouter: mainRouter)
+        let presenter = NewsListPresenter(view: view, router: moduleRouter)
+        let interactor = NewsListInteractor(presenter: presenter, service: service)
         
         view.presenter = presenter
         presenter.interactor = interactor
-        presenter.router = router
         
         return view
     }

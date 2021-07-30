@@ -7,7 +7,7 @@ protocol DetailedItemInteractorProtocol: AnyObject {
 
 final class DetailedItemInteractor: DetailedItemInteractorProtocol {
 
-    weak var presenter: DetailedItemPresenterProtocol?
+    private weak var presenter: DetailedItemPresenterProtocol?
     
     init(presenter: DetailedItemPresenterProtocol) {
         self.presenter = presenter

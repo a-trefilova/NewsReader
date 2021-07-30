@@ -7,13 +7,13 @@ final class NewsItemCell: UITableViewCell {
     
     private let imageSize: CGFloat = 50
     private let padding: CGFloat = 10
-    private var container: UIView = {
+    private let container: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private var itemTitle: UILabel = {
+    private let itemTitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         label.textColor = .label
@@ -23,7 +23,7 @@ final class NewsItemCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private var itemDate: UILabel = {
+    private let itemDate: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .secondaryLabel
@@ -32,7 +32,7 @@ final class NewsItemCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private var itemImage = NewsImageView(frame: .zero)
+    private let itemImage = NewsImageView(frame: .zero)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

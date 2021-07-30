@@ -7,8 +7,6 @@ protocol DetaildItemViewProtocol: AnyObject {
     func setImage(string: String?)
     func setDate(string: String)
     func setAuthorName(string: String)
-    func showSafariLink(validUrl: URL)
-    func showErrorMessage(_ message: String)
 }
 
 final class DetailedItemVC: UIViewController {
@@ -17,8 +15,8 @@ final class DetailedItemVC: UIViewController {
 
     private let padding: CGFloat = 20
     private let imageHeight: CGFloat = 120
-    private var imageView = NewsImageView(frame: .zero)
-    private var itemFullTitle: UILabel = {
+    private let imageView = NewsImageView(frame: .zero)
+    private let itemFullTitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = .label
@@ -27,7 +25,7 @@ final class DetailedItemVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private var itemDescription: UILabel = {
+    private let itemDescription: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         label.textColor = .label
@@ -37,7 +35,7 @@ final class DetailedItemVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private var itemDate: UILabel = {
+    private let itemDate: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .secondaryLabel
@@ -47,7 +45,7 @@ final class DetailedItemVC: UIViewController {
         return label
     }()
     
-    private var authorName: UILabel = {
+    private let authorName: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .secondaryLabel
@@ -57,7 +55,7 @@ final class DetailedItemVC: UIViewController {
         return label
     }()
     
-    private var openResourceButton: UIButton = {
+    private let openResourceButton: UIButton = {
         let button = UIButton()
         button.setTitle("View original resource", for: .normal)
         button.setTitleColor(.blue, for: .normal)
@@ -69,12 +67,12 @@ final class DetailedItemVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layoutSubviews()
-        presenter?.showDetailedInfo()
+        presenter?.didLoadView()
     }
     
     @objc
     func openResourceButtonTapped() {
-        presenter?.openResource()
+        presenter?.didTapOnOpenResource()
     }
     
     private func layoutSubviews() {
@@ -137,16 +135,6 @@ extension DetailedItemVC: DetaildItemViewProtocol {
     func setAuthorName(string: String) {
         authorName.text = string
     }
-    
-    func showSafariLink(validUrl: URL) {
-        UIApplication.shared.open(validUrl, options: [:], completionHandler: { _ in })
-    }
 
-    func showErrorMessage(_ message: String) {
-        let alert = UIAlertController(title: "Oops!", message: "Something went wrong! \(message)", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Confirm", style: .cancel)
-        alert.addAction(confirmAction)
-        self.present(alert, animated: true)
-    }
 }
 

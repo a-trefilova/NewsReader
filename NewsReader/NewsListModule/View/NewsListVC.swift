@@ -3,20 +3,20 @@ import UIKit
 
 protocol NewsListViewProtocol: AnyObject {
     func showListOfItems(items: [NewsItem])
-    func showErrorMessage(_ message: String)
 }
 
 final class NewsListVC: UIViewController {
 
     var presenter: NewsListPresenterProtocol?
-    private var tableView = UITableView(frame: .zero, style: .grouped)
+
+    private let tableView = UITableView(frame: .zero, style: .grouped)
     private var newsItemsList: [NewsItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.showListOfItems()
         setupTableView()
         layoutTableView()
+        presenter?.didLoadView()
     }
 
     private func setupTableView() {
@@ -40,13 +40,6 @@ final class NewsListVC: UIViewController {
 
 //MARK: - NewsListViewProtocol
 extension NewsListVC: NewsListViewProtocol {
-    func showErrorMessage(_ message: String) {
-        let alert = UIAlertController(title: "Oops!", message: "Something went wrong! \(message)", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Confirm", style: .cancel)
-        alert.addAction(confirmAction)
-        self.present(alert, animated: true)
-    }
-
     func showListOfItems(items: [NewsItem]) {
         newsItemsList = items
         tableView.reloadData()
@@ -82,6 +75,6 @@ extension NewsListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let currentItem = newsItemsList[indexPath.row]
-        presenter?.showDetailItem(currentItem)
+        presenter?.didSelectItem(currentItem)
     }
 }

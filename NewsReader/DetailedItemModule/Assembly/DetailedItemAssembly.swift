@@ -2,14 +2,14 @@
 import UIKit
 
 final class DetailedItemAssembly {
-    func assembleDetailedItemModule(newsItem: NewsItem) -> UIViewController {
+    func assembleDetailedItemModule(newsItem: NewsItem, mainRouter: MainRouter) -> UIViewController {
         let view = DetailedItemVC()
-        let presenter = DetailedItemPresenter(view: view)
+        let moduleRouter = DetailedItemRouter(rootView: view, mainRouter: mainRouter)
+        let presenter = DetailedItemPresenter(view: view, router: moduleRouter, newsItem: newsItem)
         let interactor = DetailedItemInteractor(presenter: presenter)
        
         view.presenter = presenter
         presenter.interactor = interactor
-        presenter.newsItem = newsItem
         
         return view
     }

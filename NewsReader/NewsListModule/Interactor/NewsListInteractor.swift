@@ -7,11 +7,12 @@ protocol NewsListInteractorProtocol {
 
 final class NewsListInteractor: NewsListInteractorProtocol {
 
-    private let service: NewsListServiceProtocol = NewsListService()
-    weak var presenter: NewsListPresenterProtocol?
+    private let service: NewsListServiceProtocol
+    private weak var presenter: NewsListPresenterProtocol?
 
-    init(presenter: NewsListPresenterProtocol) {
+    init(presenter: NewsListPresenterProtocol, service: NewsListServiceProtocol) {
         self.presenter = presenter
+        self.service = service
     }
     
     func getListOfItems(completion: @escaping (Result<[NewsItem], ErrorType>) -> Void) {

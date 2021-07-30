@@ -23,9 +23,9 @@ final class XMLParserService: NSObject, XMLParserDelegate {
         parser.delegate = self
         return parser
     }()
-    private var arrayOfNewsItems: [NewsItem] = []
+    private var arrayOfNewsItems: [NewsItemDTO] = []
     private var currentXMLTag: String = ""
-    private var currentNewsItem = NewsItem(title: "",
+    private var currentNewsItem = NewsItemDTO(title: "",
                                            description: "",
                                            link: "",
                                            pubDate: Date(),
@@ -87,7 +87,7 @@ final class XMLParserService: NSObject, XMLParserDelegate {
         shouldReturnResult = true
     }
     
-    func getResult(completion: @escaping (Result<[NewsItem], ErrorType>) -> Void) {
+    func getResult(completion: @escaping (Result<[NewsItemDTO], ErrorType>) -> Void) {
         if shouldReturnResult {
             guard !parsingDidFinishedWithError else {
                 completion(.failure(.parsingFailure))
@@ -106,7 +106,7 @@ final class XMLParserService: NSObject, XMLParserDelegate {
     }
     
     private func resetCurrentItem() {
-        currentNewsItem = NewsItem(title: "",
+        currentNewsItem = NewsItemDTO(title: "",
                                    description: "",
                                    link: "",
                                    pubDate: Date(),

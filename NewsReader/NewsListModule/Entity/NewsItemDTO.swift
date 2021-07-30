@@ -2,7 +2,8 @@
 
 import Foundation
 
-struct NewsItem {
+struct NewsItemDTO {
+    let id = UUID().uuidString
     var title: String
     var description: String
     var link: String

@@ -3,7 +3,7 @@
 import Foundation
 
 protocol NewsListServiceProtocol {
-    func fetchItems(completion: @escaping (Result<[NewsItem], ErrorType>) -> Void)
+    func fetchItems(completion: @escaping (Result<[NewsItemDTO], ErrorType>) -> Void)
 }
 
 final class NewsListService: NewsListServiceProtocol {
@@ -11,7 +11,7 @@ final class NewsListService: NewsListServiceProtocol {
     private var parser: XMLParserService?
     private let entryPoint = "http://static.feed.rbc.ru/rbc/logical/footer/news.rss"
     
-    func fetchItems(completion: @escaping (Result<[NewsItem], ErrorType>) -> Void) {
+    func fetchItems(completion: @escaping (Result<[NewsItemDTO], ErrorType>) -> Void) {
         guard let url = URL(string: entryPoint) else {
             completion(.failure(.invalidEntryPoint))
             return
@@ -24,7 +24,9 @@ final class NewsListService: NewsListServiceProtocol {
                 return
             }
             self.parser = XMLParserService(data: data)
-            self.parser?.getResult { result in completion(result) }
+            self.parser?.getResult { result in
+                completion(result)
+            }
         }
         task.resume()
     }

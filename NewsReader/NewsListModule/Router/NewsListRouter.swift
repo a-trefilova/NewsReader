@@ -2,7 +2,7 @@
 import UIKit
 
 protocol NewsListRouterProtocol {
-    func showDetailedViewController(for item: NewsItem)
+    func showDetailedViewController(for viewModelId: String)
     func showErrorMessage(_ message: String)
 }
 
@@ -15,8 +15,8 @@ class NewsListRouter: NewsListRouterProtocol {
         self.mainRouter = mainRouter
     }
 
-    func showDetailedViewController(for item: NewsItem) {
-        mainRouter.showDetailedViewController(for: item)
+    func showDetailedViewController(for viewModelId: String) {
+        mainRouter.showDetailedViewController(for: viewModelId)
     }
 
     func showErrorMessage(_ message: String) {
@@ -25,7 +25,6 @@ class NewsListRouter: NewsListRouterProtocol {
         alert.addAction(confirmAction)
         rootView.present(alert, animated: true)
     }
-
-
+    
 }
 

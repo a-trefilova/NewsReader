@@ -5,7 +5,7 @@ protocol NewsListViewProtocol: AnyObject {
     func showListOfItems(items: [NewsItem])
 }
 
-final class NewsListVC: UIViewController {
+final class NewsListViewController: UIViewController {
 
     var presenter: NewsListPresenterProtocol?
 
@@ -39,7 +39,7 @@ final class NewsListVC: UIViewController {
 }
 
 //MARK: - NewsListViewProtocol
-extension NewsListVC: NewsListViewProtocol {
+extension NewsListViewController: NewsListViewProtocol {
     func showListOfItems(items: [NewsItem]) {
         newsItemsList = items
         tableView.reloadData()
@@ -48,7 +48,7 @@ extension NewsListVC: NewsListViewProtocol {
 }
 
 //MARK: - UITableViewDataSource
-extension NewsListVC: UITableViewDataSource {
+extension NewsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         newsItemsList.count
     }
@@ -63,7 +63,7 @@ extension NewsListVC: UITableViewDataSource {
 }
 
 //MARK: - UITableViewDelegate
-extension NewsListVC: UITableViewDelegate {
+extension NewsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         0
     }

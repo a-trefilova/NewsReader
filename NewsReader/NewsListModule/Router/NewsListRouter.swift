@@ -8,9 +8,9 @@ protocol NewsListRouterProtocol {
 
 class NewsListRouter: NewsListRouterProtocol {
 
-    private let rootView: NewsListVC
+    private let rootView: NewsListViewController
     private let mainRouter: MainRouter
-    init(rootView: NewsListVC, mainRouter: MainRouter) {
+    init(rootView: NewsListViewController, mainRouter: MainRouter) {
         self.rootView = rootView
         self.mainRouter = mainRouter
     }

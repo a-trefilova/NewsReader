@@ -9,7 +9,7 @@ protocol DetaildItemViewProtocol: AnyObject {
     func setAuthorName(string: String)
 }
 
-final class DetailedItemVC: UIViewController {
+final class DetailedItemViewController: UIViewController {
     
     var presenter: DetailedItemPresenterProtocol?
 
@@ -115,7 +115,7 @@ final class DetailedItemVC: UIViewController {
 }
 
 //MARK: - DetaildItemViewProtocol
-extension DetailedItemVC: DetaildItemViewProtocol {
+extension DetailedItemViewController: DetaildItemViewProtocol {
     func setTitle(string: String) {
         itemFullTitle.text = string
     }

@@ -4,7 +4,7 @@ import UIKit
 final class NewsListAssembly {
     
     func assembleNewsListModule(with mainRouter: MainRouter) -> UIViewController {
-        let view = NewsListVC()
+        let view = NewsListViewController()
         let service = NewsListService()
         let moduleRouter = NewsListRouter(rootView: view, mainRouter: mainRouter)
         let presenter = NewsListPresenter(view: view, router: moduleRouter)

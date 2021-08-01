@@ -43,10 +43,11 @@ final class NewsListInteractor: NewsListInteractorProtocol {
 
     private func processDTO(dto: NewsItemDTO) -> NewsItemCellViewModel {
         let title = dto.title
+        let description = dto.description.cut(maxLength: 100)
         let date = self.turnDateIntoString(date: dto.pubDate)
         let image = Image(urlString: dto.imageUrl ?? "", uploadedImage: UIImage())
         let id = dto.id
-        let cellViewModel = NewsItemCellViewModel(id: id, title: title, date: date, image: image)
+        let cellViewModel = NewsItemCellViewModel(id: id, title: title, description: description, date: date, image: image)
         return cellViewModel
     }
 

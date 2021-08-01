@@ -31,6 +31,7 @@
 		248FE55626B3EE7E006CF8B9 /* UploadImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FE55526B3EE7E006CF8B9 /* UploadImageService.swift */; };
 		248FE55A26B3FA43006CF8B9 /* DetailedItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FE55926B3FA43006CF8B9 /* DetailedItemViewModel.swift */; };
 		248FE55F26B3FF6B006CF8B9 /* NewsItemCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FE55E26B3FF6B006CF8B9 /* NewsItemCellViewModel.swift */; };
+		24C4121F26B6BB54002E7B34 /* CellIdentifierFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C4121E26B6BB54002E7B34 /* CellIdentifierFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		248FE55526B3EE7E006CF8B9 /* UploadImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageService.swift; sourceTree = "<group>"; };
 		248FE55926B3FA43006CF8B9 /* DetailedItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedItemViewModel.swift; sourceTree = "<group>"; };
 		248FE55E26B3FF6B006CF8B9 /* NewsItemCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemCellViewModel.swift; sourceTree = "<group>"; };
+		24C4121E26B6BB54002E7B34 /* CellIdentifierFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifierFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +255,7 @@
 			children = (
 				248FE55126B3D6F4006CF8B9 /* Image.swift */,
 				248FE55E26B3FF6B006CF8B9 /* NewsItemCellViewModel.swift */,
+				24C4121E26B6BB54002E7B34 /* CellIdentifierFactory.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				243F0AD026AFEB7000EB5B48 /* AppDelegate.swift in Sources */,
 				248A1A2426B055F0002B8100 /* DetailedItemAssembly.swift in Sources */,
 				248FE55226B3D6F4006CF8B9 /* Image.swift in Sources */,
+				24C4121F26B6BB54002E7B34 /* CellIdentifierFactory.swift in Sources */,
 				248A1A2E26B0562B002B8100 /* DetailedItemInteractor.swift in Sources */,
 				248FE54326B152CC006CF8B9 /* ErrorType.swift in Sources */,
 				248A1A2B26B0561E002B8100 /* DetailedItemPresenter.swift in Sources */,

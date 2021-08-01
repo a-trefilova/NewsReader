@@ -8,13 +8,15 @@ protocol DetailedItemInteractorProtocol: AnyObject {
 
 final class DetailedItemInteractor: DetailedItemInteractorProtocol {
 
+    private let uploadImageService: UploadImageServiceProtocol
     private let dataStore: DataStore
     private weak var presenter: DetailedItemPresenterProtocol?
     private let id: String
 
-    init(presenter: DetailedItemPresenterProtocol, dataStore: DataStore, id: String) {
+    init(presenter: DetailedItemPresenterProtocol, dataStore: DataStore, uploadImageService: UploadImageServiceProtocol, id: String) {
         self.presenter = presenter
         self.dataStore = dataStore
+        self.uploadImageService = uploadImageService
         self.id = id
     }
 
@@ -35,12 +37,12 @@ final class DetailedItemInteractor: DetailedItemInteractorProtocol {
     }
 
     private func transformDtoToViewModel(dto: NewsItemDTO) -> DetailedItemViewModel {
-        let uploadImageService: UploadImageService = UploadImageService(entryPoint: dto.imageUrl!, cache: dataStore.cache)
+        let entryPoint = dto.imageUrl ?? ""
         var uploadedImage: UIImage = UIImage()
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.global().async {
-            uploadImageService.fetchItems { (image) in
+            self.uploadImageService.fetchItems(forEntryPoint: entryPoint) { (image) in
                 uploadedImage = image ?? UIImage()
                 group.leave()
             }

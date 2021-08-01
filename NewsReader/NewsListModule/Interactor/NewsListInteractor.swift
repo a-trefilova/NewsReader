@@ -8,18 +8,20 @@ protocol NewsListInteractorProtocol {
 
 final class NewsListInteractor: NewsListInteractorProtocol {
 
-    private let service: NewsListServiceProtocol
+    private let uploadImageService: UploadImageServiceProtocol
+    private let newsListService: NewsListServiceProtocol
     private weak var presenter: NewsListPresenterProtocol?
     private let dataStore: DataStore
 
-    init(presenter: NewsListPresenterProtocol, service: NewsListServiceProtocol, dataStore: DataStore) {
+    init(presenter: NewsListPresenterProtocol, newsListService: NewsListServiceProtocol, uploadImageService: UploadImageServiceProtocol, dataStore: DataStore) {
         self.presenter = presenter
-        self.service = service
+        self.newsListService = newsListService
+        self.uploadImageService = uploadImageService
         self.dataStore = dataStore
     }
     
     func getListOfItems(completion: @escaping (Result<[NewsItemCellViewModel], ErrorType>) -> Void) {
-        service.fetchItems { [weak self] result in
+        newsListService.fetchItems { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):
@@ -34,8 +36,7 @@ final class NewsListInteractor: NewsListInteractorProtocol {
 
      func getImage(viewModelId: String, completion: @escaping (UIImage) -> Void) {
         guard let urlString = dataStore.dataTransferObjects.first(where: { $0.id == viewModelId})?.imageUrl else { return }
-        let uploadImageService = UploadImageService(entryPoint: urlString, cache: dataStore.cache)
-        uploadImageService.fetchItems { (image) in
+        uploadImageService.fetchItems(forEntryPoint: urlString) { (image) in
             completion(image ?? UIImage())
         }
     }

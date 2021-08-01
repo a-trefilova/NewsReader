@@ -65,6 +65,12 @@ final class DetailedItemViewController: UIViewController {
         button.addTarget(self, action: #selector(openResourceButtonTapped), for: .touchUpInside)
         return button
     }()
+
+    private lazy var subviewHierarchy: [UIView: [UIView]] = {
+        guard let view = view else { return [:]}
+        let dict = [view: [imageView, itemFullTitle, itemDescription, itemDate, authorName, openResourceButton]]
+        return dict
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,12 +85,10 @@ final class DetailedItemViewController: UIViewController {
     
     private func layoutSubviews() {
         view.backgroundColor = .systemBackground
-        view.addSubview(imageView)
-        view.addSubview(itemFullTitle)
-        view.addSubview(itemDescription)
-        view.addSubview(itemDate)
-        view.addSubview(authorName)
-        view.addSubview(openResourceButton)
+        subviewHierarchy.keys.forEach { parentView in
+            guard let subviews = subviewHierarchy[parentView] else { return }
+            subviews.forEach({ parentView.addSubview($0)})
+        }
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),

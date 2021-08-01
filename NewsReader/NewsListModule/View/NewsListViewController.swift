@@ -22,7 +22,8 @@ final class NewsListViewController: UIViewController {
 
     private func setupTableView() {
         view.backgroundColor = .systemBackground
-        tableView.register(NewsItemCell.self, forCellReuseIdentifier: NewsItemCell.reuseId)
+        let reuseId = CellIdentifierFactory().getId(forCellType: NewsItemCell.self)
+        tableView.register(NewsItemCell.self, forCellReuseIdentifier: reuseId)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -61,12 +62,15 @@ extension NewsListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let defaultCell = UITableViewCell()
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsItemCell.reuseId, for: indexPath) as? NewsItemCell else { return defaultCell }
+        let reuseId = CellIdentifierFactory().getId(forCellType: NewsItemCell.self)
         let currentIndex = indexPath.row
-        guard currentIndex <= viewModelList.count - 1 else { return defaultCell }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath) as? NewsItemCell,
+              currentIndex <= viewModelList.count - 1  else {
+            return defaultCell
+        }
         let viewModel = viewModelList[currentIndex]
-        presenter?.didLoadCell(at: indexPath, viewModelId: viewModel.id)
         cell.render(viewModel)
+        presenter?.didLoadCell(at: indexPath, viewModelId: viewModel.id)
         return cell
     }
     
@@ -74,14 +78,6 @@ extension NewsListViewController: UITableViewDataSource {
 
 //MARK: - UITableViewDelegate
 extension NewsListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        0
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let currentIndex = indexPath.row

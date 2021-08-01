@@ -3,8 +3,6 @@ import UIKit
 
 final class NewsItemCell: UITableViewCell {
     
-    static let reuseId = "NewsItemCell"
-    
     private let imageSize: CGFloat = 50
     private let padding: CGFloat = 10
     private let container: UIView = {
@@ -39,6 +37,12 @@ final class NewsItemCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+
+    private lazy var subviewHierarchy: [UIView: [UIView]] = {
+        let dict = [contentView: [container],
+                    container: [itemTitle, itemDate, itemImage]]
+        return dict
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -65,11 +69,11 @@ final class NewsItemCell: UITableViewCell {
     }
     
     private func layoutElements() {
-        contentView.addSubview(container)
-        container.addSubview(itemTitle)
-        container.addSubview(itemDate)
-        container.addSubview(itemImage)
-        
+        subviewHierarchy.keys.forEach { parentView in
+            guard let subviews = subviewHierarchy[parentView] else { return }
+            subviews.forEach({ parentView.addSubview($0)})
+        }
+
         NSLayoutConstraint.activate([
             container.topAnchor.constraint(equalTo: contentView.topAnchor),
             container.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -91,6 +95,5 @@ final class NewsItemCell: UITableViewCell {
             itemDate.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
-    
 }
 

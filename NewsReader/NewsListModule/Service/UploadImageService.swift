@@ -7,16 +7,18 @@
 
 import UIKit
 
-class UploadImageService {
+protocol UploadImageServiceProtocol {
+    func fetchItems(forEntryPoint entryPoint: String, completion: @escaping (UIImage?) -> Void)
+}
+
+class UploadImageService: UploadImageServiceProtocol {
 
     private let cache: NSCache<NSString, UIImage>
-    private let entryPoint: String
-    init(entryPoint: String, cache: NSCache<NSString, UIImage>) {
-        self.entryPoint = entryPoint
+    init(cache: NSCache<NSString, UIImage>) {
         self.cache = cache
     }
 
-    func fetchItems(completion: @escaping (UIImage?) -> Void) {
+    func fetchItems(forEntryPoint entryPoint: String, completion: @escaping (UIImage?) -> Void) {
         let cacheKey = NSString(string: entryPoint)
         if let image = cache.object(forKey: cacheKey) {
             completion(image)

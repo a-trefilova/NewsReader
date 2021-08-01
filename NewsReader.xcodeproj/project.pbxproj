@@ -32,6 +32,7 @@
 		248FE55A26B3FA43006CF8B9 /* DetailedItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FE55926B3FA43006CF8B9 /* DetailedItemViewModel.swift */; };
 		248FE55F26B3FF6B006CF8B9 /* NewsItemCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FE55E26B3FF6B006CF8B9 /* NewsItemCellViewModel.swift */; };
 		24C4121F26B6BB54002E7B34 /* CellIdentifierFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C4121E26B6BB54002E7B34 /* CellIdentifierFactory.swift */; };
+		24C4122426B6C257002E7B34 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C4122326B6C257002E7B34 /* String+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		248FE55926B3FA43006CF8B9 /* DetailedItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedItemViewModel.swift; sourceTree = "<group>"; };
 		248FE55E26B3FF6B006CF8B9 /* NewsItemCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemCellViewModel.swift; sourceTree = "<group>"; };
 		24C4121E26B6BB54002E7B34 /* CellIdentifierFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifierFactory.swift; sourceTree = "<group>"; };
+		24C4122326B6C257002E7B34 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		243F0ACE26AFEB7000EB5B48 /* NewsReader */ = {
 			isa = PBXGroup;
 			children = (
+				24C4122226B6C246002E7B34 /* Utility */,
 				243F0AED26AFEFDB00EB5B48 /* Router */,
 				248A1A1E26B05595002B8100 /* DetailedItemModule */,
 				243F0AE726AFEF9C00EB5B48 /* NewsListModule */,
@@ -260,6 +263,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		24C4122226B6C246002E7B34 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				24C4122326B6C257002E7B34 /* String+Ext.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -351,6 +362,7 @@
 				248FE55626B3EE7E006CF8B9 /* UploadImageService.swift in Sources */,
 				248A1A0D26B026F3002B8100 /* XMLParserService.swift in Sources */,
 				243F0AF026AFF02E00EB5B48 /* NewsListPresenter.swift in Sources */,
+				24C4122426B6C257002E7B34 /* String+Ext.swift in Sources */,
 				248FE54D26B2FD73006CF8B9 /* DetailedItemRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

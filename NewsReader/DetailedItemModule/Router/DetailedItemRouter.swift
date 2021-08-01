@@ -16,7 +16,7 @@ class DetailedItemRouter: DetailedItemRouterProtocol {
     }
 
     func showSafariLink(validUrl: URL) {
-        UIApplication.shared.open(validUrl, options: [:], completionHandler: { _ in })
+        mainRouter.openResource(resource: validUrl)
     }
     
     func showErrorMessage(_ message: String) {

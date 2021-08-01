@@ -13,14 +13,18 @@ class MainRouter: NSObject {
     }
     
     func setInitialViewController() {
-        let newsListViewController = NewsListAssembly().assembleNewsListModule(with: self, dataStore: dataStore)
+        let newsListViewController = NewsListAssembly().assembleModule(with: self, dataStore: dataStore)
         navigationController = UINavigationController(rootViewController: newsListViewController)
         window?.rootViewController = navigationController
     }
     
     func showDetailedViewController(for id: String) {
-        let detailedViewController = DetailedItemAssembly().assembleDetailedItemModule(id: id, mainRouter: self, dataStore: dataStore)
+        let detailedViewController = DetailedItemAssembly().assembleModule(params: id, with: self, dataStore: dataStore)
         navigationController?.pushViewController(detailedViewController, animated: true)
+    }
+
+    func openResource(resource: URL) {
+        UIApplication.shared.open(resource, options: [:], completionHandler: { _ in })
     }
 }
 

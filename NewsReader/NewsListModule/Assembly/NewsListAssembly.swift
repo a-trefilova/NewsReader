@@ -1,9 +1,12 @@
 
 import UIKit
 
-final class NewsListAssembly {
-    
-    func assembleNewsListModule(with mainRouter: MainRouter, dataStore: DataStore) -> UIViewController {
+protocol AssemblyProtocol {
+    func assembleModule(params: String?, with mainRouter: MainRouter, dataStore: DataStore) -> UIViewController
+}
+
+final class NewsListAssembly: AssemblyProtocol {
+    func assembleModule(params: String? = "", with mainRouter: MainRouter, dataStore: DataStore) -> UIViewController {
         let view = NewsListViewController()
         let newsListService = NewsListService()
         let uploadImageService = UploadImageService(cache: dataStore.cache)
@@ -13,10 +16,11 @@ final class NewsListAssembly {
                                             newsListService: newsListService,
                                             uploadImageService: uploadImageService,
                                             dataStore: dataStore)
-        
+
         view.presenter = presenter
         presenter.interactor = interactor
-        
+
         return view
     }
+
 }

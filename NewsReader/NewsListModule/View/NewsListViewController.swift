@@ -26,6 +26,8 @@ final class NewsListViewController: UIViewController {
         tableView.register(NewsItemCell.self, forCellReuseIdentifier: reuseId)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100 
     }
     
     private func layoutTableView() {

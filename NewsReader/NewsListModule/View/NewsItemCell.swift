@@ -15,7 +15,17 @@ final class NewsItemCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         label.textColor = .label
-        label.numberOfLines = 3
+        label.numberOfLines = 0
+        label.lineBreakMode = .byTruncatingTail
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let itemDescription: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .label
+        label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -40,9 +50,11 @@ final class NewsItemCell: UITableViewCell {
 
     private lazy var subviewHierarchy: [UIView: [UIView]] = {
         let dict = [contentView: [container],
-                    container: [itemTitle, itemDate, itemImage]]
+                    container: [itemTitle, itemDescription, itemDate, itemImage]]
         return dict
     }()
+
+    private var didMadeConstraints = false
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,6 +72,7 @@ final class NewsItemCell: UITableViewCell {
     
     func render(_ viewModel: NewsItemCellViewModel) {
         itemTitle.text = viewModel.title
+        itemDescription.text = viewModel.description
         itemDate.text = viewModel.date
         itemImage.image = viewModel.image.uploadedImage
     }
@@ -73,12 +86,7 @@ final class NewsItemCell: UITableViewCell {
             guard let subviews = subviewHierarchy[parentView] else { return }
             subviews.forEach({ parentView.addSubview($0)})
         }
-
         NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: contentView.topAnchor),
-            container.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            container.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
             itemImage.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: padding),
             itemImage.centerYAnchor.constraint(equalTo: container.centerYAnchor),
@@ -87,12 +95,21 @@ final class NewsItemCell: UITableViewCell {
 
             itemTitle.leadingAnchor.constraint(equalTo: itemImage.trailingAnchor, constant: padding),
             itemTitle.topAnchor.constraint(equalTo: container.topAnchor, constant: padding),
-            itemTitle.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding),
             itemTitle.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding),
+
+            itemDescription.leadingAnchor.constraint(equalTo: itemTitle.leadingAnchor),
+            itemDescription.topAnchor.constraint(equalTo: itemTitle.bottomAnchor),
+            itemDescription.trailingAnchor.constraint(equalTo: itemTitle.trailingAnchor),
+            itemDescription.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding),
 
             itemDate.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding),
             itemDate.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding),
-            itemDate.heightAnchor.constraint(equalToConstant: 20)
+            itemDate.heightAnchor.constraint(equalToConstant: 20),
+
+            container.topAnchor.constraint(equalTo: contentView.topAnchor),
+            container.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            container.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

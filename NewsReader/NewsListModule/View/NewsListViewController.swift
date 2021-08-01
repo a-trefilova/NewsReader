@@ -3,6 +3,7 @@ import UIKit
 
 protocol NewsListViewProtocol: AnyObject {
     func showListOfViewModels(viewModels: [NewsItemCellViewModel])
+    func updateCell(at indexPath: IndexPath, with image: UIImage)
 }
 
 final class NewsListViewController: UIViewController {
@@ -40,6 +41,11 @@ final class NewsListViewController: UIViewController {
 
 //MARK: - NewsListViewProtocol
 extension NewsListViewController: NewsListViewProtocol {
+    func updateCell(at indexPath: IndexPath, with image: UIImage) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? NewsItemCell else { return }
+        cell.updateItemImage(image)
+    }
+
     func showListOfViewModels(viewModels: [NewsItemCellViewModel]) {
         viewModelList = viewModels
         tableView.reloadData()
@@ -53,20 +59,14 @@ extension NewsListViewController: UITableViewDataSource {
         viewModelList.count
     }
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let currentIndex = indexPath.row
-        guard currentIndex <= viewModelList.count - 1 else { return }
-        let currentViewModelId = viewModelList[currentIndex].id
-        
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let defaultCell = UITableViewCell()
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsItemCell.reuseId, for: indexPath) as? NewsItemCell else { return defaultCell }
         let currentIndex = indexPath.row
         guard currentIndex <= viewModelList.count - 1 else { return defaultCell }
-        let currentViewModel = viewModelList[currentIndex]
-        cell.render(currentViewModel)
+        let viewModel = viewModelList[currentIndex]
+        presenter?.didLoadCell(at: indexPath, viewModelId: viewModel.id)
+        cell.render(viewModel)
         return cell
     }
     

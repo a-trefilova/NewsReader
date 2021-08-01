@@ -20,7 +20,6 @@
 		243F0B0026AFF14900EB5B48 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F0AFF26AFF14900EB5B48 /* MainRouter.swift */; };
 		248A1A0D26B026F3002B8100 /* XMLParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A0C26B026F3002B8100 /* XMLParserService.swift */; };
 		248A1A1126B02B48002B8100 /* NewsItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A1026B02B48002B8100 /* NewsItemCell.swift */; };
-		248A1A1A26B04EAF002B8100 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A1926B04EAF002B8100 /* CacheManager.swift */; };
 		248A1A2426B055F0002B8100 /* DetailedItemAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A2326B055F0002B8100 /* DetailedItemAssembly.swift */; };
 		248A1A2826B05606002B8100 /* DetailedItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A2726B05606002B8100 /* DetailedItemViewController.swift */; };
 		248A1A2B26B0561E002B8100 /* DetailedItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1A2A26B0561E002B8100 /* DetailedItemPresenter.swift */; };
@@ -50,7 +49,6 @@
 		243F0AFF26AFF14900EB5B48 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		248A1A0C26B026F3002B8100 /* XMLParserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParserService.swift; sourceTree = "<group>"; };
 		248A1A1026B02B48002B8100 /* NewsItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemCell.swift; sourceTree = "<group>"; };
-		248A1A1926B04EAF002B8100 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		248A1A2326B055F0002B8100 /* DetailedItemAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedItemAssembly.swift; sourceTree = "<group>"; };
 		248A1A2726B05606002B8100 /* DetailedItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedItemViewController.swift; sourceTree = "<group>"; };
 		248A1A2A26B0561E002B8100 /* DetailedItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedItemPresenter.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 			children = (
 				243F0AF626AFF0A100EB5B48 /* NewsListService.swift */,
 				248A1A0C26B026F3002B8100 /* XMLParserService.swift */,
-				248A1A1926B04EAF002B8100 /* CacheManager.swift */,
 				248FE55526B3EE7E006CF8B9 /* UploadImageService.swift */,
 			);
 			path = Service;
@@ -341,7 +338,6 @@
 				248A1A2426B055F0002B8100 /* DetailedItemAssembly.swift in Sources */,
 				248FE55226B3D6F4006CF8B9 /* Image.swift in Sources */,
 				248A1A2E26B0562B002B8100 /* DetailedItemInteractor.swift in Sources */,
-				248A1A1A26B04EAF002B8100 /* CacheManager.swift in Sources */,
 				248FE54326B152CC006CF8B9 /* ErrorType.swift in Sources */,
 				248A1A2B26B0561E002B8100 /* DetailedItemPresenter.swift in Sources */,
 				243F0B0026AFF14900EB5B48 /* MainRouter.swift in Sources */,

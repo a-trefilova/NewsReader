@@ -3,6 +3,7 @@ import UIKit
 
 protocol NewsListInteractorProtocol {
     func getListOfItems(completion: @escaping (Result<[NewsItemCellViewModel], ErrorType>) -> Void)
+    func getImage(viewModelId: String, completion: @escaping (UIImage) -> Void)
 }
 
 final class NewsListInteractor: NewsListInteractorProtocol {
@@ -31,6 +32,14 @@ final class NewsListInteractor: NewsListInteractorProtocol {
         }
     }
 
+     func getImage(viewModelId: String, completion: @escaping (UIImage) -> Void) {
+        guard let urlString = dataStore.dataTransferObjects.first(where: { $0.id == viewModelId})?.imageUrl else { return }
+        let uploadImageService = UploadImageService(entryPoint: urlString, cache: dataStore.cache)
+        uploadImageService.fetchItems { (image) in
+            completion(image ?? UIImage())
+        }
+    }
+
     private func processDTO(dto: NewsItemDTO) -> NewsItemCellViewModel {
         let title = dto.title
         let date = self.turnDateIntoString(date: dto.pubDate)
@@ -39,7 +48,6 @@ final class NewsListInteractor: NewsListInteractorProtocol {
         let cellViewModel = NewsItemCellViewModel(id: id, title: title, date: date, image: image)
         return cellViewModel
     }
-
 
     private func turnDateIntoString(date: Date) -> String {
         let formatter = DateFormatter()

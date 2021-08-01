@@ -59,6 +59,10 @@ final class NewsItemCell: UITableViewCell {
         itemDate.text = viewModel.date
         itemImage.image = viewModel.image.uploadedImage
     }
+
+    func updateItemImage(_ image: UIImage) {
+        itemImage.image = image
+    }
     
     private func layoutElements() {
         contentView.addSubview(container)

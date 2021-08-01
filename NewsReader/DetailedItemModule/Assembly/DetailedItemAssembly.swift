@@ -1,8 +1,9 @@
 
 import UIKit
 
-final class DetailedItemAssembly {
-    func assembleDetailedItemModule(id: String, mainRouter: MainRouter, dataStore: DataStore) -> UIViewController {
+final class DetailedItemAssembly: AssemblyProtocol {
+    func assembleModule(params: String?, with mainRouter: MainRouter, dataStore: DataStore) -> UIViewController {
+        guard let id = params else { return UIViewController() }
         let view = DetailedItemViewController()
         let moduleRouter = DetailedItemRouter(rootView: view, mainRouter: mainRouter)
         let presenter = DetailedItemPresenter(view: view, router: moduleRouter, id: id)
@@ -11,10 +12,11 @@ final class DetailedItemAssembly {
                                                 dataStore: dataStore,
                                                 uploadImageService: uploadImageService,
                                                 id: id)
-       
+
         view.presenter = presenter
         presenter.interactor = interactor
-        
+
         return view
     }
+
 }

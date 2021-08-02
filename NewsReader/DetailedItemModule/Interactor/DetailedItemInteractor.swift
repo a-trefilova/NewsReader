@@ -8,26 +8,26 @@ protocol DetailedItemInteractorProtocol: AnyObject {
 
 final class DetailedItemInteractor: DetailedItemInteractorProtocol {
 
-    private let uploadImageService: UploadImageServiceProtocol
-    private let dataStore: DataStore
     private weak var presenter: DetailedItemPresenterProtocol?
-    private let id: String
+    private let dataStore: DataStore
+    private let uploadImageService: UploadImageServiceProtocol
+    private let dataObjectId: String
 
-    init(presenter: DetailedItemPresenterProtocol, dataStore: DataStore, uploadImageService: UploadImageServiceProtocol, id: String) {
+    init(presenter: DetailedItemPresenterProtocol, dataStore: DataStore, uploadImageService: UploadImageServiceProtocol, dataObjectId: String) {
         self.presenter = presenter
         self.dataStore = dataStore
         self.uploadImageService = uploadImageService
-        self.id = id
+        self.dataObjectId = dataObjectId
     }
 
     func getViewModel(completion: @escaping (DetailedItemViewModel) -> Void) {
-        guard let dto = dataStore.dataTransferObjects.first(where: { $0.id == id}) else { return }
+        guard let dto = dataStore.dataTransferObjects.first(where: { $0.id == dataObjectId}) else { return }
         let viewModel = transformDtoToViewModel(dto: dto)
         completion(viewModel)
     }
 
     func validateUrl(completion: @escaping (Result<URL, ErrorType>) -> Void) {
-        guard let dto = dataStore.dataTransferObjects.first(where: { $0.id == id}) else { return }
+        guard let dto = dataStore.dataTransferObjects.first(where: { $0.id == dataObjectId}) else { return }
         let urlString = dto.link 
         if let url = URL(string: urlString) {
             completion(.success(url))

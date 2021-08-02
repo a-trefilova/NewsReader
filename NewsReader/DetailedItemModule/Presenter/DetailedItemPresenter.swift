@@ -20,11 +20,13 @@ final class DetailedItemPresenter: DetailedItemPresenterProtocol {
     }
 
     func didLoadView() {
-        interactor?.getViewModel(completion: { (viewModel) in
-            DispatchQueue.main.async {
-                self.view?.render(viewModel: viewModel)
-            }
-        })
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.interactor?.getViewModel(completion: { (viewModel) in
+                DispatchQueue.main.async {
+                    self.view?.render(viewModel: viewModel)
+                }
+            })
+        }
     }
     
     func didTapOnOpenResource() {

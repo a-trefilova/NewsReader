@@ -53,8 +53,6 @@ final class NewsItemCell: UITableViewCell {
                     container: [itemTitle, itemDescription, itemDate, itemImage]]
         return dict
     }()
-
-    private var didMadeConstraints = false
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

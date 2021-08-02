@@ -10,8 +10,8 @@ protocol NewsListPresenterProtocol: AnyObject {
 final class NewsListPresenter: NewsListPresenterProtocol {
 
     var interactor: NewsListInteractorProtocol?
-    private var router: NewsListRouterProtocol
     private weak var view: NewsListViewProtocol?
+    private let router: NewsListRouterProtocol
 
     init(view: NewsListViewProtocol, router: NewsListRouterProtocol) {
         self.view = view

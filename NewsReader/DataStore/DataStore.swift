@@ -1,5 +1,5 @@
 
-import Foundation
+import UIKit
 
 final class DataStore {
     let cache: NSCache<NSString, UIImage> = NSCache<NSString, UIImage>()

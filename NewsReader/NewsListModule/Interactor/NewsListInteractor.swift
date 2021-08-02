@@ -8,9 +8,9 @@ protocol NewsListInteractorProtocol {
 
 final class NewsListInteractor: NewsListInteractorProtocol {
 
-    private let uploadImageService: UploadImageServiceProtocol
-    private let newsListService: NewsListServiceProtocol
     private weak var presenter: NewsListPresenterProtocol?
+    private let newsListService: NewsListServiceProtocol
+    private let uploadImageService: UploadImageServiceProtocol
     private let dataStore: DataStore
 
     init(presenter: NewsListPresenterProtocol, newsListService: NewsListServiceProtocol, uploadImageService: UploadImageServiceProtocol, dataStore: DataStore) {

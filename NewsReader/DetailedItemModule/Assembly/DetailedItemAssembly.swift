@@ -11,7 +11,7 @@ final class DetailedItemAssembly: AssemblyProtocol {
         let interactor = DetailedItemInteractor(presenter: presenter,
                                                 dataStore: dataStore,
                                                 uploadImageService: uploadImageService,
-                                                id: id)
+                                                dataObjectId: id)
 
         view.presenter = presenter
         presenter.interactor = interactor

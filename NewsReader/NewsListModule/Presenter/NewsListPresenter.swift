@@ -25,7 +25,14 @@ final class NewsListPresenter: NewsListPresenterProtocol {
             case .success(let items):
                 DispatchQueue.main.async { self.view?.showListOfViewModels(viewModels: items)}
             case .failure(let error):
-                DispatchQueue.main.async { self.router.showErrorMessage(error.localizedDescription) }
+                switch error {
+                case .parsingFailure(let errorMessage):
+                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
+                case .connectionFailure(let errorMessage):
+                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
+                case .invalidEntryPoint(let errorMessage):
+                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
+                }
             }
         }
     }

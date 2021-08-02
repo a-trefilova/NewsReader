@@ -11,7 +11,7 @@ protocol UploadImageServiceProtocol {
     func fetchItems(forEntryPoint entryPoint: String, completion: @escaping (UIImage?) -> Void)
 }
 
-class UploadImageService: UploadImageServiceProtocol {
+final class UploadImageService: UploadImageServiceProtocol {
 
     private let cache: NSCache<NSString, UIImage>
     init(cache: NSCache<NSString, UIImage>) {

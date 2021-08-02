@@ -13,10 +13,10 @@ final class DetailedItemPresenter: DetailedItemPresenterProtocol {
     private let router: DetailedItemRouterProtocol
     private weak var view: DetaildItemViewProtocol?
 
-    init(view: DetaildItemViewProtocol, router: DetailedItemRouterProtocol, id: String) {
+    init(view: DetaildItemViewProtocol, router: DetailedItemRouterProtocol, viewModelId: String) {
         self.view = view
         self.router = router
-        self.viewModelId = id
+        self.viewModelId = viewModelId
     }
 
     func didLoadView() {
@@ -34,7 +34,14 @@ final class DetailedItemPresenter: DetailedItemPresenterProtocol {
             case .success(let validUrl):
                 DispatchQueue.main.async { self.router.showSafariLink(validUrl: validUrl) }
             case .failure(let error):
-                DispatchQueue.main.async { self.router.showErrorMessage(error.localizedDescription)}
+                switch error {
+                case .parsingFailure(let errorMessage):
+                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
+                case .connectionFailure(let errorMessage):
+                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
+                case .invalidEntryPoint(let errorMessage):
+                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
+                }
             }
         }
     }

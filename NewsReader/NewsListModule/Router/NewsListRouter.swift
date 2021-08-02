@@ -6,7 +6,7 @@ protocol NewsListRouterProtocol {
     func showErrorMessage(_ message: String)
 }
 
-class NewsListRouter: NewsListRouterProtocol {
+final class NewsListRouter: NewsListRouterProtocol {
 
     private let rootView: NewsListViewController
     private let mainRouter: MainRouter

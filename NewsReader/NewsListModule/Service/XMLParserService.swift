@@ -33,6 +33,7 @@ final class XMLParserService: NSObject, XMLParserDelegate {
                                            author: "")
     private var shouldReturnResult = false
     private var parsingDidFinishedWithError = false
+    private var parsingError: String = ""
     private let data: Data
     
     init(data: Data) {
@@ -85,12 +86,13 @@ final class XMLParserService: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         parsingDidFinishedWithError = true
         shouldReturnResult = true
+        parsingError = parseError.localizedDescription
     }
     
     func getResult(completion: @escaping (Result<[NewsItemDTO], ErrorType>) -> Void) {
         if shouldReturnResult {
             guard !parsingDidFinishedWithError else {
-                completion(.failure(.parsingFailure))
+                completion(.failure(.parsingFailure("Parser did finished with error: \(parsingError)")))
                 return 
             }
             completion(.success(arrayOfNewsItems))

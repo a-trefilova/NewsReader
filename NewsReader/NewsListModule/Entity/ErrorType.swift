@@ -8,7 +8,7 @@
 import Foundation
 
 enum ErrorType: Error {
-    case parsingFailure
-    case connectionFailure
-    case invalidEntryPoint
+    case parsingFailure(String)
+    case connectionFailure(String)
+    case invalidEntryPoint(String)
 }

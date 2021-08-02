@@ -6,7 +6,7 @@ protocol DetailedItemRouterProtocol {
     func showErrorMessage(_ message: String)
 }
 
-class DetailedItemRouter: DetailedItemRouterProtocol {
+final class DetailedItemRouter: DetailedItemRouterProtocol {
 
     private let rootView: DetailedItemViewController
     private let mainRouter: MainRouter
@@ -20,7 +20,7 @@ class DetailedItemRouter: DetailedItemRouterProtocol {
     }
     
     func showErrorMessage(_ message: String) {
-        let alert = UIAlertController(title: "Oops!", message: "Something went wrong! \(message)", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Obops!", message: "Something went wrong! \(message)", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "Confirm", style: .cancel)
         alert.addAction(confirmAction)
         rootView.present(alert, animated: true)

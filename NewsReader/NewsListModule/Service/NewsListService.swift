@@ -13,14 +13,14 @@ final class NewsListService: NewsListServiceProtocol {
     
     func fetchItems(completion: @escaping (Result<[NewsItemDTO], ErrorType>) -> Void) {
         guard let url = URL(string: entryPoint) else {
-            completion(.failure(.invalidEntryPoint))
+            completion(.failure(.invalidEntryPoint("URL Link is unavailable")))
             return
         }
         let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             guard let self = self,
                   error == nil,
                   let data = data else {
-                completion(.failure(.connectionFailure))
+                completion(.failure(.connectionFailure("Check internet connection and try again later")))
                 return
             }
             self.parser = XMLParserService(data: data)

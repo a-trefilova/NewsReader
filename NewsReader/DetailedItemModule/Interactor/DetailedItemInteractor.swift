@@ -32,7 +32,7 @@ final class DetailedItemInteractor: DetailedItemInteractorProtocol {
         if let url = URL(string: urlString) {
             completion(.success(url))
         } else {
-            completion(.failure(.invalidEntryPoint))
+            completion(.failure(.invalidEntryPoint("URL Link is unavailable")))
         }
     }
 

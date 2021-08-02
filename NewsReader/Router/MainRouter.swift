@@ -1,7 +1,7 @@
 
 import UIKit
 
-class MainRouter: NSObject {
+final class MainRouter: NSObject {
 
     var dataStore: DataStore
     var navigationController: UINavigationController?
@@ -25,14 +25,5 @@ class MainRouter: NSObject {
 
     func openResource(resource: URL) {
         UIApplication.shared.open(resource, options: [:], completionHandler: { _ in })
-    }
-}
-
-class DataStore {
-    let cache: NSCache<NSString, UIImage> = NSCache<NSString, UIImage>()
-    private(set) var dataTransferObjects: [NewsItemDTO] = []
-
-    func saveData(data: [NewsItemDTO]) {
-        self.dataTransferObjects = data
     }
 }

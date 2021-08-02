@@ -1,9 +1,3 @@
-//
-//  UploadImageService.swift
-//  NewsReader
-//
-//  Created by 19399090 on 30.07.2021.
-//
 
 import UIKit
 

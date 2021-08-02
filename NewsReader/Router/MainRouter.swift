@@ -3,10 +3,10 @@ import UIKit
 
 final class MainRouter: NSObject {
 
-    var dataStore: DataStore
-    var navigationController: UINavigationController?
-    var window: UIWindow?
-    
+    private let dataStore: DataStore
+    private let window: UIWindow?
+    private var navigationController: UINavigationController?
+
     init(window: UIWindow?, dataStore: DataStore) {
         self.window = window
         self.dataStore = dataStore

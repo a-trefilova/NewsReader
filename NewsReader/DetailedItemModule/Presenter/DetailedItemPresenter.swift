@@ -19,15 +19,11 @@ final class DetailedItemPresenter: DetailedItemPresenterProtocol {
         self.viewModelId = viewModelId
     }
 
-    func didLoadView() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.interactor?.getViewModel(completion: { (viewModel) in
-                DispatchQueue.main.async {
-                    self.view?.render(viewModel: viewModel)
-                }
-            })
-        }
-    }
+	func didLoadView() {
+		self.interactor?.getViewModel(completion: { (viewModel) in
+			DispatchQueue.main.async { self.view?.render(viewModel: viewModel) }
+		})
+	}
     
     func didTapOnOpenResource() {
         interactor?.validateUrl { [weak self] result in
@@ -36,14 +32,7 @@ final class DetailedItemPresenter: DetailedItemPresenterProtocol {
             case .success(let validUrl):
                 DispatchQueue.main.async { self.router.showSafariLink(validUrl: validUrl) }
             case .failure(let error):
-                switch error {
-                case .parsingFailure(let errorMessage):
-                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
-                case .connectionFailure(let errorMessage):
-                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
-                case .invalidEntryPoint(let errorMessage):
-                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
-                }
+				DispatchQueue.main.async { self.router.showErrorMessage(error.description) }
             }
         }
     }

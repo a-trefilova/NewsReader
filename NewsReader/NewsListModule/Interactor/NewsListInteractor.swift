@@ -12,12 +12,14 @@ final class NewsListInteractor: NewsListInteractorProtocol {
     private let newsListService: NewsListServiceProtocol
     private let uploadImageService: UploadImageServiceProtocol
     private let dataStore: DataStore
+	private let viewModelFactory: ViewModelFactoryProtocol
 
-    init(presenter: NewsListPresenterProtocol, newsListService: NewsListServiceProtocol, uploadImageService: UploadImageServiceProtocol, dataStore: DataStore) {
+	init(presenter: NewsListPresenterProtocol, newsListService: NewsListServiceProtocol, uploadImageService: UploadImageServiceProtocol, dataStore: DataStore, viewModelFactory: ViewModelFactoryProtocol) {
         self.presenter = presenter
         self.newsListService = newsListService
         self.uploadImageService = uploadImageService
         self.dataStore = dataStore
+		self.viewModelFactory = viewModelFactory
     }
     
     func getListOfItems(completion: @escaping (Result<[NewsItemCellViewModel], ErrorType>) -> Void) {
@@ -36,24 +38,10 @@ final class NewsListInteractor: NewsListInteractorProtocol {
 
      func getImage(viewModelId: String, completion: @escaping (UIImage) -> Void) {
         guard let urlString = dataStore.dataTransferObjects.first(where: { $0.id == viewModelId})?.imageUrl else { return }
-        uploadImageService.fetchItems(forEntryPoint: urlString) { (image) in
-            completion(image ?? UIImage())
-        }
+		uploadImageService.fetchItems(forEntryPoint: urlString, completion: completion)
     }
 
     private func processDTO(dto: NewsItemDTO) -> NewsItemCellViewModel {
-        let title = dto.title
-        let description = dto.description.cut(maxLength: 100)
-        let date = self.turnDateIntoString(date: dto.pubDate)
-        let image = Image(urlString: dto.imageUrl ?? "", uploadedImage: UIImage())
-        let id = dto.id
-        let cellViewModel = NewsItemCellViewModel(id: id, title: title, description: description, date: date, image: image)
-        return cellViewModel
-    }
-
-    private func turnDateIntoString(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd,yyyy"
-        return formatter.string(from: date)
+		viewModelFactory.getCellViewModel(for: dto)
     }
 }

@@ -1,7 +1,13 @@
 
 import UIKit
 
-final class MainRouter: NSObject {
+protocol MainRouterProtocol {
+	func setInitialViewController()
+	func showDetailedViewController(for newsItemId: String)
+	func openResource(resource: URL)
+}
+
+final class MainRouter: NSObject, MainRouterProtocol {
 
     private let dataStore: DataStore
     private let window: UIWindow?
@@ -18,12 +24,12 @@ final class MainRouter: NSObject {
         window?.rootViewController = navigationController
     }
     
-    func showDetailedViewController(for id: String) {
-        let detailedViewController = DetailedItemAssembly().assembleModule(params: id, with: self, dataStore: dataStore)
+    func showDetailedViewController(for newsItemId: String) {
+        let detailedViewController = DetailedItemAssembly().assembleModule(newsItemId: newsItemId, with: self, dataStore: dataStore)
         navigationController?.pushViewController(detailedViewController, animated: true)
     }
 
     func openResource(resource: URL) {
-        UIApplication.shared.open(resource, options: [:], completionHandler: { _ in })
+        UIApplication.shared.open(resource, options: [:])
     }
 }

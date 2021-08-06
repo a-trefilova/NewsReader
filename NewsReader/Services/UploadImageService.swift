@@ -2,7 +2,7 @@
 import UIKit
 
 protocol UploadImageServiceProtocol {
-    func fetchItems(forEntryPoint entryPoint: String, completion: @escaping (UIImage?) -> Void)
+    func fetchItems(forEntryPoint entryPoint: String, completion: @escaping (UIImage) -> Void)
 }
 
 final class UploadImageService: UploadImageServiceProtocol {
@@ -12,21 +12,22 @@ final class UploadImageService: UploadImageServiceProtocol {
         self.cache = cache
     }
 
-    func fetchItems(forEntryPoint entryPoint: String, completion: @escaping (UIImage?) -> Void) {
+    func fetchItems(forEntryPoint entryPoint: String, completion: @escaping (UIImage) -> Void) {
+		let defaultImage = UIImage()
         let cacheKey = NSString(string: entryPoint)
         if let image = cache.object(forKey: cacheKey) {
             completion(image)
             return
         }
         guard let url = URL(string: entryPoint) else {
-            completion(nil)
+            completion(defaultImage)
             return
         }
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil,
                   let data = data,
                   let image = UIImage(data: data) else {
-                completion(nil)
+                completion(defaultImage)
                 return
             }
             self.cache.setObject(image, forKey: cacheKey)

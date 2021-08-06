@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		242CEA2F26BD937500E94A75 /* URLValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CEA2E26BD937500E94A75 /* URLValidationService.swift */; };
+		242CEA3326BD970F00E94A75 /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CEA3226BD970F00E94A75 /* ViewModelFactory.swift */; };
 		243F0AD026AFEB7000EB5B48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F0ACF26AFEB7000EB5B48 /* AppDelegate.swift */; };
 		243F0AD226AFEB7000EB5B48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F0AD126AFEB7000EB5B48 /* SceneDelegate.swift */; };
 		243F0AD426AFEB7000EB5B48 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F0AD326AFEB7000EB5B48 /* NewsListViewController.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		242CEA2E26BD937500E94A75 /* URLValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLValidationService.swift; sourceTree = "<group>"; };
+		242CEA3226BD970F00E94A75 /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
 		243F0ACC26AFEB7000EB5B48 /* NewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		243F0ACF26AFEB7000EB5B48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		243F0AD126AFEB7000EB5B48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,7 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				24C4122826B7CAE0002E7B34 /* DataStore */,
-				24C4122226B6C246002E7B34 /* Utility */,
+				24C4122226B6C246002E7B34 /* Extensions */,
+				243F0AE926AFEFC000EB5B48 /* Services */,
 				243F0AED26AFEFDB00EB5B48 /* Router */,
 				248A1A1E26B05595002B8100 /* DetailedItemModule */,
 				243F0AE726AFEF9C00EB5B48 /* NewsListModule */,
@@ -121,7 +126,6 @@
 				243F0AEC26AFEFD400EB5B48 /* View */,
 				243F0AEB26AFEFCE00EB5B48 /* Presenter */,
 				243F0AEA26AFEFC700EB5B48 /* Interactor */,
-				243F0AE926AFEFC000EB5B48 /* Service */,
 				243F0AE826AFEFAD00EB5B48 /* Entity */,
 			);
 			path = NewsListModule;
@@ -136,14 +140,16 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		243F0AE926AFEFC000EB5B48 /* Service */ = {
+		243F0AE926AFEFC000EB5B48 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				243F0AF626AFF0A100EB5B48 /* NewsListService.swift */,
 				248A1A0C26B026F3002B8100 /* XMLParserService.swift */,
 				248FE55526B3EE7E006CF8B9 /* UploadImageService.swift */,
+				242CEA2E26BD937500E94A75 /* URLValidationService.swift */,
+				242CEA3226BD970F00E94A75 /* ViewModelFactory.swift */,
 			);
-			path = Service;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		243F0AEA26AFEFC700EB5B48 /* Interactor */ = {
@@ -266,12 +272,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		24C4122226B6C246002E7B34 /* Utility */ = {
+		24C4122226B6C246002E7B34 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				24C4122326B6C257002E7B34 /* String+Ext.swift */,
 			);
-			path = Utility;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		24C4122826B7CAE0002E7B34 /* DataStore */ = {
@@ -357,10 +363,12 @@
 				248FE55A26B3FA43006CF8B9 /* DetailedItemViewModel.swift in Sources */,
 				243F0AF426AFF06600EB5B48 /* NewsListInteractor.swift in Sources */,
 				243F0AFD26AFF12100EB5B48 /* NewsListAssembly.swift in Sources */,
+				242CEA3326BD970F00E94A75 /* ViewModelFactory.swift in Sources */,
 				248FE55F26B3FF6B006CF8B9 /* NewsItemCellViewModel.swift in Sources */,
 				243F0AD426AFEB7000EB5B48 /* NewsListViewController.swift in Sources */,
 				243F0AD026AFEB7000EB5B48 /* AppDelegate.swift in Sources */,
 				248A1A2426B055F0002B8100 /* DetailedItemAssembly.swift in Sources */,
+				242CEA2F26BD937500E94A75 /* URLValidationService.swift in Sources */,
 				248FE55226B3D6F4006CF8B9 /* Image.swift in Sources */,
 				24C4121F26B6BB54002E7B34 /* CellIdentifierFactory.swift in Sources */,
 				248A1A2E26B0562B002B8100 /* DetailedItemInteractor.swift in Sources */,

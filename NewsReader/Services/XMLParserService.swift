@@ -89,15 +89,17 @@ final class XMLParserService: NSObject, XMLParserDelegate {
         parsingError = parseError.localizedDescription
     }
     
-    func getResult(completion: @escaping (Result<[NewsItemDTO], ErrorType>) -> Void) {
+	func getResult(completion: ((Result<[NewsItemDTO], ErrorType>) -> Void)? = nil) {
         if shouldReturnResult {
-            guard !parsingDidFinishedWithError else {
-                completion(.failure(.parsingFailure("Parser did finished with error: \(parsingError)")))
+            guard !parsingDidFinishedWithError,
+				  let unwrappedCompletion = completion
+			else {
+				completion!(.failure(.parsingFailure("Parser did finished with error: \(parsingError)")))
                 return 
             }
-            completion(.success(arrayOfNewsItems))
+			unwrappedCompletion(.success(arrayOfNewsItems))
         } else {
-            getResult(completion: { _ in })
+            getResult()
         }
     }
     

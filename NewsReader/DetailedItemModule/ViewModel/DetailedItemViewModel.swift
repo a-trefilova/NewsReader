@@ -2,10 +2,10 @@
 import Foundation
 
 struct DetailedItemViewModel {
-    var id: String
-    var image: Image
-    var title: String
-    var description: String
-    var authorName: String
-    var date: String
+    let newsItemId: String
+	let image: Image
+	let title: String
+	let description: String
+	let authorName: String
+	let date: String
 }

@@ -25,14 +25,7 @@ final class NewsListPresenter: NewsListPresenterProtocol {
             case .success(let items):
                 DispatchQueue.main.async { self.view?.showListOfViewModels(viewModels: items)}
             case .failure(let error):
-                switch error {
-                case .parsingFailure(let errorMessage):
-                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
-                case .connectionFailure(let errorMessage):
-                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
-                case .invalidEntryPoint(let errorMessage):
-                    DispatchQueue.main.async { self.router.showErrorMessage(errorMessage) }
-                }
+				DispatchQueue.main.async { self.router.showErrorMessage(error.description) }
             }
         }
     }
@@ -41,11 +34,9 @@ final class NewsListPresenter: NewsListPresenterProtocol {
         router.showDetailedViewController(for: viewModelId)
     }
 
-    func didLoadCell(at indexPath: IndexPath, viewModelId: String) {
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.interactor?.getImage(viewModelId: viewModelId) { image in
-                DispatchQueue.main.async { self.view?.updateCell(at: indexPath, with: image)}
-            }
-        }
-    }
+	func didLoadCell(at indexPath: IndexPath, viewModelId: String) {
+		self.interactor?.getImage(viewModelId: viewModelId) { image in
+			DispatchQueue.main.async { self.view?.updateCell(at: indexPath, with: image) }
+		}
+	}
 }

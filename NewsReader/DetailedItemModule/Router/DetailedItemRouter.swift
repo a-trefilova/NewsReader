@@ -9,8 +9,8 @@ protocol DetailedItemRouterProtocol {
 final class DetailedItemRouter: DetailedItemRouterProtocol {
 
     private let rootView: DetailedItemViewController
-    private let mainRouter: MainRouter
-    init(rootView: DetailedItemViewController, mainRouter: MainRouter) {
+    private let mainRouter: MainRouterProtocol
+    init(rootView: DetailedItemViewController, mainRouter: MainRouterProtocol) {
         self.rootView = rootView
         self.mainRouter = mainRouter
     }

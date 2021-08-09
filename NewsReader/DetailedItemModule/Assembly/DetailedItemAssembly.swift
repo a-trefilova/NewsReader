@@ -2,7 +2,7 @@
 import UIKit
 
 final class DetailedItemAssembly: AssemblyProtocol {
-    func assembleModule(newsItemId: String?, with mainRouter: MainRouter, dataStore: DataStore) -> UIViewController {
+    func assembleModule(newsItemId: String?, with mainRouter: MainRouterProtocol, dataStore: DataStoreProtocol) -> UIViewController {
         guard let id = newsItemId else { return UIViewController() }
         let view = DetailedItemViewController()
         let moduleRouter = DetailedItemRouter(rootView: view, mainRouter: mainRouter)

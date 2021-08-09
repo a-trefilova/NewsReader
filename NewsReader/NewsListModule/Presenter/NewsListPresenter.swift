@@ -2,6 +2,7 @@
 import Foundation
 
 protocol NewsListPresenterProtocol: AnyObject {
+	var interactor: NewsListInteractorProtocol? { get set }
     func didLoadView()
     func didSelectViewModel(_ viewModelId: String)
     func didLoadCell(at indexPath: IndexPath, viewModelId: String)

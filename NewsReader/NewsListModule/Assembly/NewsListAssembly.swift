@@ -2,11 +2,11 @@
 import UIKit
 
 protocol AssemblyProtocol {
-    func assembleModule(newsItemId: String?, with mainRouter: MainRouter, dataStore: DataStore) -> UIViewController
+    func assembleModule(newsItemId: String?, with mainRouter: MainRouterProtocol, dataStore: DataStoreProtocol) -> UIViewController
 }
 
 final class NewsListAssembly: AssemblyProtocol {
-    func assembleModule(newsItemId: String? = "", with mainRouter: MainRouter, dataStore: DataStore) -> UIViewController {
+    func assembleModule(newsItemId: String? = "", with mainRouter: MainRouterProtocol, dataStore: DataStoreProtocol) -> UIViewController {
         let view = NewsListViewController()
         let newsListService = NewsListService()
         let uploadImageService = UploadImageService(cache: dataStore.cache)

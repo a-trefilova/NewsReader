@@ -20,6 +20,7 @@ class ViewModelFactory: ViewModelFactoryProtocol {
 		let date = self.turnDateIntoString(date: dto.pubDate)
 		let image = Image(urlString: dto.imageUrl ?? "", uploadedImage: UIImage())
 		let id = dto.id
+		print(id)
 		let cellViewModel = NewsItemCellViewModel(id: id, title: title, description: description, date: date, image: image)
 		return cellViewModel
 	}

@@ -11,10 +11,10 @@ final class NewsListInteractor: NewsListInteractorProtocol {
     private weak var presenter: NewsListPresenterProtocol?
     private let newsListService: NewsListServiceProtocol
     private let uploadImageService: UploadImageServiceProtocol
-    private let dataStore: DataStore
+    private let dataStore: DataStoreProtocol
 	private let viewModelFactory: ViewModelFactoryProtocol
 
-	init(presenter: NewsListPresenterProtocol, newsListService: NewsListServiceProtocol, uploadImageService: UploadImageServiceProtocol, dataStore: DataStore, viewModelFactory: ViewModelFactoryProtocol) {
+	init(presenter: NewsListPresenterProtocol, newsListService: NewsListServiceProtocol, uploadImageService: UploadImageServiceProtocol, dataStore: DataStoreProtocol, viewModelFactory: ViewModelFactoryProtocol) {
         self.presenter = presenter
         self.newsListService = newsListService
         self.uploadImageService = uploadImageService

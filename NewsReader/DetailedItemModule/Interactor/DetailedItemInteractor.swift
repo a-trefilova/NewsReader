@@ -9,13 +9,13 @@ protocol DetailedItemInteractorProtocol: AnyObject {
 final class DetailedItemInteractor: DetailedItemInteractorProtocol {
 
     private weak var presenter: DetailedItemPresenterProtocol?
-    private let dataStore: DataStore
+    private let dataStore: DataStoreProtocol
     private let uploadImageService: UploadImageServiceProtocol
 	private let urlValidationService: URLValidationServiceProtocol?
 	private let viewModelFactory: ViewModelFactoryProtocol
     private let dataObjectId: String
 
-	init(presenter: DetailedItemPresenterProtocol, dataStore: DataStore, uploadImageService: UploadImageServiceProtocol, urlValidationService: URLValidationServiceProtocol?, viewModelFactory: ViewModelFactoryProtocol, dataObjectId: String) {
+	init(presenter: DetailedItemPresenterProtocol, dataStore: DataStoreProtocol, uploadImageService: UploadImageServiceProtocol, urlValidationService: URLValidationServiceProtocol?, viewModelFactory: ViewModelFactoryProtocol, dataObjectId: String) {
         self.presenter = presenter
         self.dataStore = dataStore
         self.uploadImageService = uploadImageService

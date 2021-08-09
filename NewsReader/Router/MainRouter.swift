@@ -9,11 +9,11 @@ protocol MainRouterProtocol {
 
 final class MainRouter: NSObject, MainRouterProtocol {
 
-    private let dataStore: DataStore
+    private let dataStore: DataStoreProtocol
     private let window: UIWindow?
     private var navigationController: UINavigationController?
 
-    init(window: UIWindow?, dataStore: DataStore) {
+    init(window: UIWindow?, dataStore: DataStoreProtocol) {
         self.window = window
         self.dataStore = dataStore
     }

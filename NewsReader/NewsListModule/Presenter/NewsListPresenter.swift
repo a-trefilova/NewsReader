@@ -4,7 +4,7 @@ import Foundation
 protocol NewsListPresenterProtocol: AnyObject {
 	var interactor: NewsListInteractorProtocol? { get set }
     func didLoadView()
-    func didSelectViewModel(_ viewModelId: String)
+    func didSelectViewModel(completion: ((NewsListRouterProtocol) -> Void)) 
     func didLoadCell(at indexPath: IndexPath, viewModelId: String)
 }
 
@@ -31,12 +31,12 @@ final class NewsListPresenter: NewsListPresenterProtocol {
         }
     }
 
-    func didSelectViewModel(_ viewModelId: String) {
-        router.showDetailedViewController(for: viewModelId)
+	func didSelectViewModel(completion: ((NewsListRouterProtocol) -> Void)) {
+       completion(router)
     }
 
 	func didLoadCell(at indexPath: IndexPath, viewModelId: String) {
-		self.interactor?.getImage(viewModelId: viewModelId) { image in
+		interactor?.getImage(viewModelId: viewModelId) { image in
 			DispatchQueue.main.async { self.view?.updateCell(at: indexPath, with: image) }
 		}
 	}

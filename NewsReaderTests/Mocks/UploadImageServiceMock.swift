@@ -8,7 +8,7 @@
 import UIKit
 @testable import NewsReader
 
-final class NewsListUploadImageServiceMock: UploadImageServiceProtocol {
+final class UploadImageServiceMock: UploadImageServiceProtocol {
 
 	var fetchItemsCalled = false
 

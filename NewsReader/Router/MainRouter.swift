@@ -3,7 +3,7 @@ import UIKit
 
 protocol MainRouterProtocol {
 	func setInitialViewController()
-	func showDetailedViewController(for newsItemId: String)
+	func showDetailedViewController(_ newsItemViewModel: NewsItemViewModel)
 	func openResource(resource: URL)
 }
 
@@ -24,8 +24,10 @@ final class MainRouter: NSObject, MainRouterProtocol {
         window?.rootViewController = navigationController
     }
     
-    func showDetailedViewController(for newsItemId: String) {
-        let detailedViewController = DetailedItemAssembly().assembleModule(newsItemId: newsItemId, with: self, dataStore: dataStore)
+    func showDetailedViewController(_ newsItemViewModel: NewsItemViewModel) {
+		let detailedViewController = DetailedItemAssembly().assembleModule(newsItemViewModel: newsItemViewModel,
+																		   with: self,
+																		   dataStore: dataStore)
         navigationController?.pushViewController(detailedViewController, animated: true)
     }
 

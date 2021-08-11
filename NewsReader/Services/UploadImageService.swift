@@ -23,8 +23,9 @@ final class UploadImageService: UploadImageServiceProtocol {
             completion(defaultImage)
             return
         }
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard error == nil,
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            guard let self = self,
+				  error == nil,
                   let data = data,
                   let image = UIImage(data: data) else {
                 completion(defaultImage)

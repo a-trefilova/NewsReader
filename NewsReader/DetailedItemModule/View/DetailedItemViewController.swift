@@ -2,7 +2,8 @@
 import UIKit
 
 protocol DetaildItemViewProtocol: AnyObject {
-    func render(viewModel: DetailedItemViewModel)
+    func render(viewModel: NewsItemViewModel)
+	func presentViewController(_ viewController: UIViewController, animated: Bool)
 }
 
 final class DetailedItemViewController: UIViewController {
@@ -122,7 +123,12 @@ final class DetailedItemViewController: UIViewController {
 
 //MARK: - DetaildItemViewProtocol
 extension DetailedItemViewController: DetaildItemViewProtocol {
-    func render(viewModel: DetailedItemViewModel) {
+
+	func presentViewController(_ viewController: UIViewController, animated: Bool) {
+		present(viewController, animated: animated)
+	}
+
+    func render(viewModel: NewsItemViewModel) {
         itemFullTitle.text = viewModel.title
         itemDescription.text = viewModel.description
         imageView.image = viewModel.image.uploadedImage

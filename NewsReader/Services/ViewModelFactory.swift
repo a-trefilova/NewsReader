@@ -8,47 +8,19 @@
 import UIKit
 
 protocol ViewModelFactoryProtocol {
-	func getCellViewModel(for dto: NewsItemDTO) -> NewsItemCellViewModel
-	func getDetailViewModel(for dto: NewsItemDTO, uploadImageService: UploadImageServiceProtocol) -> DetailedItemViewModel
+	func getCellViewModel(for dto: NewsItemDTO) -> NewsItemViewModel
 }
 
 class ViewModelFactory: ViewModelFactoryProtocol {
 
-	public func getCellViewModel(for dto: NewsItemDTO) -> NewsItemCellViewModel {
+	public func getCellViewModel(for dto: NewsItemDTO) -> NewsItemViewModel {
 		let title = dto.title
 		let description = dto.description.cut(maxLength: 100)
-		let date = self.turnDateIntoString(date: dto.pubDate)
+		let date = dto.pubDate.formateDateToString()
 		let image = Image(urlString: dto.imageUrl ?? "", uploadedImage: UIImage())
 		let id = dto.id
 		print(id)
-		let cellViewModel = NewsItemCellViewModel(id: id, title: title, description: description, date: date, image: image)
+		let cellViewModel = NewsItemViewModel(id: id, title: title, description: description, date: date, image: image, urlString: dto.link, authorName: dto.author)
 		return cellViewModel
 	}
-
-	public func getDetailViewModel(for dto: NewsItemDTO, uploadImageService: UploadImageServiceProtocol) -> DetailedItemViewModel {
-		let entryPoint = dto.imageUrl ?? ""
-		var uploadedImage: UIImage = UIImage()
-		let group = DispatchGroup()
-		group.enter()
-		uploadImageService.fetchItems(forEntryPoint: entryPoint) { (image) in
-			uploadedImage = image
-			group.leave()
-		}
-		group.wait()
-		let viewModel = DetailedItemViewModel(newsItemId: dto.id,
-											  image: Image(urlString: dto.imageUrl ?? "", uploadedImage: uploadedImage),
-											  title: dto.title,
-											  description: dto.description,
-											  authorName: dto.author ?? "",
-											  date: turnDateIntoString(date: dto.pubDate))
-		return viewModel
-	}
-
-	
-	private func turnDateIntoString(date: Date) -> String {
-		let formatter = DateFormatter()
-		formatter.dateFormat = "MMM dd,yyyy"
-		return formatter.string(from: date)
-	}
-
 }

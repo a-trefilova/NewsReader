@@ -88,9 +88,7 @@ extension NewsListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let currentIndex = indexPath.row
         guard currentIndex <= viewModelList.count - 1 else { return }
-        let currentItem = viewModelList[indexPath.row]
-		presenter?.didSelectViewModel(completion: { router in
-			currentItem.wasSelected(router: router)
-		})
+        var currentItem = viewModelList[indexPath.row]
+		currentItem.action = .tap(presenter)
     }
 }

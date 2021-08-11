@@ -9,8 +9,19 @@ struct NewsItemViewModel {
     let image: Image
 	let urlString: String
 	let authorName: String?
-
-	func wasSelected(router: NewsListRouterProtocol) {
-		router.showDetailedViewController(self)
+	var action: Action = .none {
+		didSet {
+			switch action {
+			case .tap(let presenter):
+				presenter?.didSelectViewModel(self)
+			default:
+				break
+			}
+		}
 	}
+}
+
+enum Action {
+	case none
+	case tap(NewsListPresenterProtocol?)
 }

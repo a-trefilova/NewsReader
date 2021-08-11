@@ -4,7 +4,7 @@ import Foundation
 protocol NewsListPresenterProtocol: AnyObject {
 	var interactor: NewsListInteractorProtocol? { get set }
     func didLoadView()
-    func didSelectViewModel(completion: ((NewsListRouterProtocol) -> Void)) 
+    func didSelectViewModel(_ viewModel: NewsItemViewModel)
     func didLoadCell(at indexPath: IndexPath, viewModelId: String)
 }
 
@@ -31,8 +31,8 @@ final class NewsListPresenter: NewsListPresenterProtocol {
         }
     }
 
-	func didSelectViewModel(completion: ((NewsListRouterProtocol) -> Void)) {
-       completion(router)
+	func didSelectViewModel(_ viewModel: NewsItemViewModel) {
+		router.showDetailedViewController(viewModel)
     }
 
 	func didLoadCell(at indexPath: IndexPath, viewModelId: String) {

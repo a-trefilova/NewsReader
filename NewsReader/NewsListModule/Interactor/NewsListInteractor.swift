@@ -2,7 +2,7 @@
 import UIKit
 
 protocol NewsListInteractorProtocol {
-    func getListOfItems(completion: @escaping (Result<[NewsItemCellViewModel], ErrorType>) -> Void)
+    func getListOfItems(completion: @escaping (Result<[NewsItemViewModel], ErrorType>) -> Void)
     func getImage(viewModelId: String, completion: @escaping (UIImage) -> Void)
 }
 
@@ -22,7 +22,7 @@ final class NewsListInteractor: NewsListInteractorProtocol {
 		self.viewModelFactory = viewModelFactory
     }
     
-    func getListOfItems(completion: @escaping (Result<[NewsItemCellViewModel], ErrorType>) -> Void) {
+    func getListOfItems(completion: @escaping (Result<[NewsItemViewModel], ErrorType>) -> Void) {
         newsListService.fetchItems { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -41,7 +41,7 @@ final class NewsListInteractor: NewsListInteractorProtocol {
 		uploadImageService.fetchItems(forEntryPoint: urlString, completion: completion)
     }
 
-    private func processDTO(dto: NewsItemDTO) -> NewsItemCellViewModel {
+    private func processDTO(dto: NewsItemDTO) -> NewsItemViewModel {
 		viewModelFactory.getCellViewModel(for: dto)
     }
 }

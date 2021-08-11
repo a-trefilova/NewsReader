@@ -8,9 +8,9 @@ protocol DetailedItemRouterProtocol {
 
 final class DetailedItemRouter: DetailedItemRouterProtocol {
 
-    private let rootView: DetailedItemViewController
+    private let rootView: DetaildItemViewProtocol
     private let mainRouter: MainRouterProtocol
-    init(rootView: DetailedItemViewController, mainRouter: MainRouterProtocol) {
+    init(rootView: DetaildItemViewProtocol, mainRouter: MainRouterProtocol) {
         self.rootView = rootView
         self.mainRouter = mainRouter
     }
@@ -23,6 +23,6 @@ final class DetailedItemRouter: DetailedItemRouterProtocol {
         let alert = UIAlertController(title: "Obops!", message: "Something went wrong! \(message)", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "Confirm", style: .cancel)
         alert.addAction(confirmAction)
-        rootView.present(alert, animated: true)
+		rootView.presentViewController(alert, animated: true)
     }
 }

@@ -14,7 +14,7 @@ final class NewsListInteractorMock: NewsListInteractorProtocol {
 	var getListOfItemsCalled = false
 	var getImageCalled = false
 
-	func getListOfItems(completion: @escaping (Result<[NewsItemCellViewModel], ErrorType>) -> Void) {
+	func getListOfItems(completion: @escaping (Result<[NewsItemViewModel], ErrorType>) -> Void) {
 		getListOfItemsCalled = true
 		completion(.success([]))
 	}

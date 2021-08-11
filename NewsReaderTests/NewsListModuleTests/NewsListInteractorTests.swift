@@ -13,16 +13,16 @@ final class NewsListInteractorTests: XCTestCase {
 	var interactor: NewsListInteractorProtocol!
 	var presenter: NewsListPresenterMock!
 	var newsListService: NewsListServiceMock!
-	var uploadImageService: NewsListUploadImageServiceMock!
-	var dataStore: NewsListDataStoreMock!
+	var uploadImageService: UploadImageServiceMock!
+	var dataStore: DataStoreMock!
 	var viewModelFactory: NewsListViewModelFactoryMock!
 
 	override func setUp() {
 		super.setUp()
 		presenter = NewsListPresenterMock()
 		newsListService = NewsListServiceMock()
-		uploadImageService = NewsListUploadImageServiceMock()
-		dataStore = NewsListDataStoreMock()
+		uploadImageService = UploadImageServiceMock()
+		dataStore = DataStoreMock()
 		viewModelFactory = NewsListViewModelFactoryMock()
 		interactor = NewsListInteractor(presenter: presenter,
 										newsListService: newsListService,
@@ -43,7 +43,7 @@ final class NewsListInteractorTests: XCTestCase {
 
 	func testGetListOfItems() {
 		// arrange
-		let completion: (Result<[NewsItemCellViewModel], ErrorType>) -> Void = { _ in }
+		let completion: (Result<[NewsItemViewModel], ErrorType>) -> Void = { _ in }
 
 		// act
 		interactor.getListOfItems(completion: completion)

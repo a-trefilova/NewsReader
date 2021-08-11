@@ -1,7 +1,17 @@
 
 import UIKit
 
-final class NewsItemCell: UITableViewCell {
+protocol CellIdentifierProtocol where Self: UITableViewCell {
+	var id: String { get }
+}
+
+extension CellIdentifierProtocol {
+	var id: String {
+		return String(describing: type(of: self))
+	}
+}
+
+final class NewsItemCell: UITableViewCell, CellIdentifierProtocol {
     
     private let imageSize: CGFloat = 50
     private let padding: CGFloat = 10
@@ -68,7 +78,7 @@ final class NewsItemCell: UITableViewCell {
         itemImage.image = nil
     }
     
-    func render(_ viewModel: NewsItemCellViewModel) {
+    func render(_ viewModel: NewsItemViewModel) {
         itemTitle.text = viewModel.title
         itemDescription.text = viewModel.description
         itemDate.text = viewModel.date

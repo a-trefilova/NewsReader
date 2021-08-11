@@ -2,28 +2,28 @@
 import UIKit
 
 protocol NewsListRouterProtocol {
-    func showDetailedViewController(for viewModelId: String)
+    func showDetailedViewController(_ newsItemViewModel: NewsItemViewModel)
     func showErrorMessage(_ message: String)
 }
 
 final class NewsListRouter: NewsListRouterProtocol {
 
-    private let rootView: NewsListViewController
+    private let rootView: NewsListViewProtocol
     private let mainRouter: MainRouterProtocol
-    init(rootView: NewsListViewController, mainRouter: MainRouterProtocol) {
+    init(rootView: NewsListViewProtocol, mainRouter: MainRouterProtocol) {
         self.rootView = rootView
         self.mainRouter = mainRouter
     }
 
-    func showDetailedViewController(for viewModelId: String) {
-        mainRouter.showDetailedViewController(for: viewModelId)
+    func showDetailedViewController(_ newsItemViewModel: NewsItemViewModel) {
+        mainRouter.showDetailedViewController(newsItemViewModel)
     }
 
     func showErrorMessage(_ message: String) {
         let alert = UIAlertController(title: "Oops!", message: "Something went wrong! \(message)", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "Confirm", style: .cancel)
         alert.addAction(confirmAction)
-        rootView.present(alert, animated: true)
+		rootView.presentViewController(alert, animated: true)
     }
     
 }

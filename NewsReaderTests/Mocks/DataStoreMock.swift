@@ -8,7 +8,7 @@
 import UIKit
 @testable import NewsReader
 
-final class NewsListDataStoreMock: DataStoreProtocol {
+final class DataStoreMock: DataStoreProtocol {
 
 	var cacheCalled = false
 	var dataTransferObjectsCalled = false

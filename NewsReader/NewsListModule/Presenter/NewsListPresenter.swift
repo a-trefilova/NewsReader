@@ -2,7 +2,6 @@
 import Foundation
 
 protocol NewsListPresenterProtocol: AnyObject {
-	var interactor: NewsListInteractorProtocol? { get set }
     func didLoadView()
     func didSelectViewModel(_ viewModel: NewsItemViewModel)
     func didLoadCell(at indexPath: IndexPath, viewModelId: String)
@@ -10,11 +9,12 @@ protocol NewsListPresenterProtocol: AnyObject {
 
 final class NewsListPresenter: NewsListPresenterProtocol {
 
-    var interactor: NewsListInteractorProtocol?
+    private let interactor: NewsListInteractorProtocol?
     private weak var view: NewsListViewProtocol?
     private let router: NewsListRouterProtocol
 
-    init(view: NewsListViewProtocol, router: NewsListRouterProtocol) {
+	init(interactor: NewsListInteractorProtocol, view: NewsListViewProtocol, router: NewsListRouterProtocol) {
+		self.interactor = interactor
         self.view = view
         self.router = router
     }

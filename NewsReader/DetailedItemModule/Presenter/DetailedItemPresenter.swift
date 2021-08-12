@@ -2,19 +2,19 @@
 import Foundation
 
 protocol DetailedItemPresenterProtocol: AnyObject {
-	var interactor: DetailedItemInteractorProtocol? { get set }
     func didLoadView()
     func didTapOnOpenResource()
 }
 
 final class DetailedItemPresenter: DetailedItemPresenterProtocol {
 
-	var interactor: DetailedItemInteractorProtocol?
+	private let interactor: DetailedItemInteractorProtocol?
 	private let viewModel: NewsItemViewModel
 	private let router: DetailedItemRouterProtocol
 	private weak var view: DetaildItemViewProtocol?
 
-	init(view: DetaildItemViewProtocol, router: DetailedItemRouterProtocol, viewModel: NewsItemViewModel) {
+	init(interactor: DetailedItemInteractorProtocol, view: DetaildItemViewProtocol, router: DetailedItemRouterProtocol, viewModel: NewsItemViewModel) {
+		self.interactor = interactor
 		self.view = view
 		self.router = router
 		self.viewModel = viewModel

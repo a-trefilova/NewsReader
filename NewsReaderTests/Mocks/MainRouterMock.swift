@@ -14,19 +14,16 @@ class MainRouterMock: MainRouterProtocol {
 	private(set) var showDetailedViewControllerCalled = false
 	private(set) var openResourceCalled = false
 
-
 	func setInitialViewController() {
 		setInitialViewControllerCalled = true
 	}
 
-	func showDetailedViewController(for newsItemId: String) {
+	func showDetailedViewController(_ newsItemViewModel: NewsItemViewModel) {
 		 showDetailedViewControllerCalled = true
 	}
 
 	func openResource(resource: URL) {
 		openResourceCalled = true
 	}
-
-
 }
 

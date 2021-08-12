@@ -20,8 +20,9 @@ final class NewsListPresenterTests: XCTestCase {
 		view = NewsListViewMock()
 		router = NewsListRouterMock()
 		interactor = NewsListInteractorMock()
-		presenter = NewsListPresenter(view: view, router: router)
-		presenter.interactor = interactor
+		presenter = NewsListPresenter(interactor: interactor,
+									  view: view,
+									  router: router)
 	}
 
 	override func tearDown() {
@@ -42,13 +43,16 @@ final class NewsListPresenterTests: XCTestCase {
 
 	func testDidSelectViewModel() {
 		// arrange
-		let viewModelId = ""
-
+		var showDetailViewControllerCalled = false
+		let viewModel = NewsItemViewModel(id: "", title: "", description: "", date: "", image: Image(urlString: "", uploadedImage: UIImage()), urlString: "", authorName: "")
+		router.showDetailedViewControllerStub = { showViewModel in
+			showDetailViewControllerCalled = showViewModel == viewModel
+		}
 		// act
-		presenter.didSelectViewModel(viewModelId)
+		presenter.didSelectViewModel(viewModel)
 
 		// assert
-		XCTAssertTrue(router.showDetailViewControllerCalled)
+		XCTAssert(showDetailViewControllerCalled)
 	}
 
 	func testDidLoadCell() {

@@ -10,11 +10,11 @@ import Foundation
 
 final class NewsListRouterMock: NewsListRouterProtocol {
 
-	var showDetailViewControllerCalled = false
+	var showDetailedViewControllerStub: ((NewsItemViewModel) -> Void)?
 	var showErrorMessageCalled = false
 
-	func showDetailedViewController(for viewModelId: String) {
-		showDetailViewControllerCalled = true
+	func showDetailedViewController(_ newsItemViewModel: NewsItemViewModel) {
+		showDetailedViewControllerStub?(newsItemViewModel)
 	}
 
 	func showErrorMessage(_ message: String) {

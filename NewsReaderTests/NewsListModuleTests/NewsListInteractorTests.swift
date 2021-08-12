@@ -11,7 +11,6 @@ import XCTest
 final class NewsListInteractorTests: XCTestCase {
 
 	var interactor: NewsListInteractorProtocol!
-	var presenter: NewsListPresenterMock!
 	var newsListService: NewsListServiceMock!
 	var uploadImageService: UploadImageServiceMock!
 	var dataStore: DataStoreMock!
@@ -19,20 +18,17 @@ final class NewsListInteractorTests: XCTestCase {
 
 	override func setUp() {
 		super.setUp()
-		presenter = NewsListPresenterMock()
 		newsListService = NewsListServiceMock()
 		uploadImageService = UploadImageServiceMock()
 		dataStore = DataStoreMock()
 		viewModelFactory = NewsListViewModelFactoryMock()
-		interactor = NewsListInteractor(presenter: presenter,
-										newsListService: newsListService,
+		interactor = NewsListInteractor(newsListService: newsListService,
 										uploadImageService: uploadImageService,
 										dataStore: dataStore,
 										viewModelFactory: viewModelFactory)
 	}
 
 	override func tearDown() {
-		presenter = nil
 		newsListService = nil
 		uploadImageService = nil
 		dataStore = nil

@@ -15,7 +15,7 @@ final class NewsListViewModelFactoryMock: ViewModelFactoryProtocol {
 
 	func getCellViewModel(for dto: NewsItemDTO) -> NewsItemViewModel {
 		getCellViewModelCalled = true
-		return NewsItemViewModel(id: "", title: "", description: "", date: "", image: Image(urlString: "", uploadedImage: UIImage()))
+		return NewsItemViewModel(id: "", title: "", description: "", date: "", image: Image(urlString: "", uploadedImage: UIImage()), urlString: "", authorName: "")
 	}
 
 	func getDetailViewModel(for dto: NewsItemDTO, uploadImageService: UploadImageServiceProtocol) -> DetailedItemViewModel {

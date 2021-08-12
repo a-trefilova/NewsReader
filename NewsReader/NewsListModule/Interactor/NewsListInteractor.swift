@@ -8,14 +8,12 @@ protocol NewsListInteractorProtocol {
 
 final class NewsListInteractor: NewsListInteractorProtocol {
 
-    private weak var presenter: NewsListPresenterProtocol?
     private let newsListService: NewsListServiceProtocol
     private let uploadImageService: UploadImageServiceProtocol
     private let dataStore: DataStoreProtocol
 	private let viewModelFactory: ViewModelFactoryProtocol
 
-	init(presenter: NewsListPresenterProtocol, newsListService: NewsListServiceProtocol, uploadImageService: UploadImageServiceProtocol, dataStore: DataStoreProtocol, viewModelFactory: ViewModelFactoryProtocol) {
-        self.presenter = presenter
+	init(newsListService: NewsListServiceProtocol, uploadImageService: UploadImageServiceProtocol, dataStore: DataStoreProtocol, viewModelFactory: ViewModelFactoryProtocol) {
         self.newsListService = newsListService
         self.uploadImageService = uploadImageService
         self.dataStore = dataStore

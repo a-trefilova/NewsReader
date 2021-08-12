@@ -12,15 +12,14 @@ final class NewsListAssembly: NewsListAssemblyProtocol {
         let uploadImageService = UploadImageService(cache: dataStore.cache)
 		let viewModelFactory = ViewModelFactory()
         let moduleRouter = NewsListRouter(rootView: view, mainRouter: mainRouter)
-        let presenter = NewsListPresenter(view: view, router: moduleRouter)
-        let interactor = NewsListInteractor(presenter: presenter,
-                                            newsListService: newsListService,
-                                            uploadImageService: uploadImageService,
+		let interactor = NewsListInteractor(newsListService: newsListService,
+											uploadImageService: uploadImageService,
 											dataStore: dataStore,
 											viewModelFactory: viewModelFactory)
-
+		let presenter = NewsListPresenter(interactor: interactor,
+										  view: view,
+										  router: moduleRouter)
         view.presenter = presenter
-        presenter.interactor = interactor
 
         return view
     }

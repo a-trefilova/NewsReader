@@ -10,10 +10,10 @@ import UIKit
 
 final class DetailedItemViewMock: DetaildItemViewProtocol {
 
-	var renderStub: ((DetailedItemViewModel) -> Void)?
+	var renderStub: ((NewsItemViewModel) -> Void)?
 	var presentViewControllerStub: ((UIViewController, Bool) -> Void)?
 
-	func render(viewModel: DetailedItemViewModel) {
+	func render(viewModel: NewsItemViewModel) {
 		renderStub?(viewModel)
 	}
 

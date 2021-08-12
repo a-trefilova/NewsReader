@@ -14,16 +14,23 @@ final class DetailedItemPresenterTests: XCTestCase {
 	var view: DetailedItemViewMock!
 	var interactor: DetailedItemInteractorMock!
 	var router: DetailedItemRouterMock!
+	private let viewModel = NewsItemViewModel(id: "",
+											  title: "",
+											  description: "",
+											  date: "",
+											  image: Image(urlString: "", uploadedImage: UIImage()),
+											  urlString: "",
+											  authorName: "")
 
 	override func setUp() {
 		super.setUp()
 		view = DetailedItemViewMock()
 		interactor = DetailedItemInteractorMock()
 		router = DetailedItemRouterMock()
-		presenter = DetailedItemPresenter(view: view,
+		presenter = DetailedItemPresenter(interactor: interactor,
+										  view: view,
 										  router: router,
-										  viewModelId: "id")
-		presenter.interactor = interactor
+										  viewModel: viewModel)
 
 	}
 
@@ -37,11 +44,16 @@ final class DetailedItemPresenterTests: XCTestCase {
 
 	func testDidLoadView() {
 		// arrange
+		var renderCalled = false
+		view.renderStub = { [self] showViewModel in
+			renderCalled = showViewModel == viewModel
+		}
+
 		// act
 		presenter.didLoadView()
 
 		// assert
-		XCTAssertTrue(interactor.getViewModelCalled)
+		XCTAssert(renderCalled)
 	}
 
 	func testDidTapOnOpenResource() {

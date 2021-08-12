@@ -31,8 +31,10 @@ final class NewsListRouterTests: XCTestCase {
 
 	func testShowDetailViewController() {
 		// arrange
+		let viewModel = NewsItemViewModel(id: "", title: "", description: "", date: "", image: Image(urlString: "", uploadedImage: UIImage()), urlString: "", authorName: "")
+		
 		// act
-		newsListRouter.showDetailedViewController(for: "")
+		newsListRouter.showDetailedViewController(viewModel)
 
 		// assert
 		XCTAssertTrue(mainRouter.showDetailedViewControllerCalled)

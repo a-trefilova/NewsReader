@@ -10,7 +10,6 @@ import Foundation
 
 final class NewsListPresenterMock: NewsListPresenterProtocol {
 
-	var interactor: NewsListInteractorProtocol?
 	var didLoadViewCalled = false
 	var didSelectViewModelCalled = false
 	var didLoadCellCalled = false
@@ -19,7 +18,7 @@ final class NewsListPresenterMock: NewsListPresenterProtocol {
 		didLoadViewCalled = true
 	}
 
-	func didSelectViewModel(_ viewModelId: String) {
+	func didSelectViewModel(_ viewModel: NewsItemViewModel) {
 		didSelectViewModelCalled = true
 	}
 
